@@ -1,0 +1,34 @@
+﻿namespace GenerateurGrilleLoto;
+
+/*
+Expérience utilisateur :
+
+1. On demande combien de grille le joueur souhaite entre 1 et 10
+2. ⁠On indique le prix à l’utilisateur : 5€ la grille les 2 premières grilles, puis 4€ la grille les 2 suivantes, et ainsi de suite jusqu’à 1€ les 2 dernières grilles
+3. ⁠On encaisse un montant donné par le joueur supérieur au prix et inférieur à 100€
+4. Et rend l’éventuelle monnaie et on affiche les grilles sous le format :
+
+Grille 1 : 1 2 3 4 5 - 6 7
+Grille 2 : …
+
+Une grille EuroMillions se compose de 50 numéros (de 1 à 50) et 12 étoiles (de 1 à 12).
+
+Aucun chiffre ne peut être en double entre les numéros et les étoiles 
+
+L’affichage des numéros est ordonné en ordre croissant, et idem pour les étoiles 
+
+On ne doit pas générer de grilles identiques lors d’une même génération de plusieurs grilles
+*/
+
+internal class GenerateurGrilleDuLoto
+{
+    // List de numero grille de 1 a 50: si le chiffre 1 et choisie il sera suprimer de la list pour eviter et le chiffre sera stoker pour eviter davoir le meme nuemro pour letoile.
+    // List de numero Etoile de 1 a 22: pareille le chiffre sera ajouter a la list daffichage et aussi suprimer pour eviter les meme chiffre
+
+    private readonly List<string> _numero = new();
+
+    internal void Lancer()
+    {
+        Console.WriteLine("toto");
+    }
+}
