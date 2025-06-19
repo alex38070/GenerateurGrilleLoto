@@ -1,4 +1,4 @@
 ﻿namespace GenerateurGrilleLoto;
-internal class Grille
+internal class Caisse
 {
 }
