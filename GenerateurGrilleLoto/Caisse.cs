@@ -9,7 +9,8 @@ internal class Caisse
     internal void Encaisser(double prix)
     {
         double montant = PrendreMonnaie(prix);
-        Console.WriteLine(RendreMonnaie(prix, montant));
+        string monnaie = RendreMonnaie(prix, montant);
+        Console.WriteLine(monnaie);
     }
 
     internal double PrendreMonnaie(double prix)

@@ -23,6 +23,7 @@ internal class Prix
             else if (i <= 10)
                 prix += 1.50;
         }
+
         return prix;
     }
 }

@@ -23,46 +23,57 @@ internal class Grille
 
         for (int i = 1; i <= nombreGrille; i++)
         {
-            List<int> grille = [];
 
-            NumeroAleatoire(grille);
-            EtoileAleatoire(grille);
-            Console.Write("\r\nNumero : ");
-            AfficherGrille(grille);
+            Console.Write($"\r\nGrille {i} : ");
+            AfficherGrille();
 
         }
     }
 
-    internal List<int> NumeroAleatoire(List<int> _grille)
+    internal void AfficherGrille()
+    {
+        List<int> grille = [];
+
+        ObtenirNumeroAleatoire(grille);
+
+        ObtenirEtoileAleatoire(grille);
+
+        List<int> grilleTriee = grille.OrderBy(item => item).ToList();
+
+        for (int i = 0; i < grilleTriee.Count; i++)
+        {
+            int item = grilleTriee[i];
+
+            if (item < 10)
+                Console.Write($" {item}  ");
+            else
+                Console.Write($"{item}  ");
+
+            if (i == 4)
+                Console.Write("* ");
+        }
+    }
+
+    internal List<int> ObtenirNumeroAleatoire(List<int> grille)
     {
         for (int i = 1; i <= 5; i++)
         {
             int numero = _numeros[Random.Shared.Next(1, _numeros.Count)];
-            _grille.Add(numero);
-        }
-        return _grille;
+            grille.Add(numero);
 
+        }
+
+        return grille;
     }
 
-    internal List<int> EtoileAleatoire(List<int> _grille)
+    internal List<int> ObtenirEtoileAleatoire(List<int> grille)
     {
         for (int i = 1; i <= 2; i++)
         {
             int numero = _etoiles[Random.Shared.Next(1, _etoiles.Count)];
-            _grille.Add(numero);
-        }
-        return _grille;
-    }
-
-    internal void AfficherGrille(List<int> _grille)
-    {
-        foreach (int item in _grille)
-        {
-            if (item < 10)
-                Console.Write($" {item} ");
-            if (item >= 10)
-                Console.Write($"{item} ");
+            grille.Add(numero);
         }
 
+        return grille;
     }
 }
