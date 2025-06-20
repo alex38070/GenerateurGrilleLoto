@@ -1,5 +1,16 @@
 ﻿namespace GenerateurGrilleLoto;
-internal class UtilitaireConsole
+internal static class UtilitaireConsole
 {
+    internal static double DemanderNombreFlotantEntreMinMax(string message, double min, double max)
+    {
+        while (true)
+        {
+            Console.WriteLine();
+            Console.Write($"\r\n{message} entre {min} et {max} : ");
+            string saisie = Console.ReadLine() ?? string.Empty;
 
+            if (double.TryParse(saisie, out double montant) && montant >= min && montant <= max)
+                return montant;
+        }
+    }
 }

@@ -4,7 +4,12 @@
 Expérience utilisateur :
 
 1. On demande combien de grille le joueur souhaite entre 1 et 10
-2. ⁠On indique le prix à l’utilisateur : 5€ la grille les 2 premières grilles, puis 4€ la grille les 2 suivantes, et ainsi de suite jusqu’à 1€ les 2 dernières grilles
+2. ⁠On indique le prix à l’utilisateur : 7.50€ la grille les 2 premières grilles, puis 6€ la grille les 2 suivantes, et ainsi de suite jusqu’à 1€ les 2 dernières grilles
+    7.50€   Grilles 1 et 2
+    6.00€   Grilles 3 et 4
+    4.50€   Grilles 5 et 6
+    3.00€   Grilles 7 et 8
+    1.50€   Grilles 9 et 10
 3. ⁠On encaisse un montant donné par le joueur supérieur au prix et inférieur à 100€
 4. Et rend l’éventuelle monnaie et on affiche les grilles sous le format :
 
@@ -22,13 +27,18 @@ On ne doit pas générer de grilles identiques lors d’une même génération d
 
 internal class GenerateurGrilleDuLoto
 {
-    // List de numero grille de 1 a 50: si le chiffre 1 et choisie il sera suprimer de la list pour eviter et le chiffre sera stoker pour eviter davoir le meme nuemro pour letoile.
-    // List de numero Etoile de 1 a 22: pareille le chiffre sera ajouter a la list daffichage et aussi suprimer pour eviter les meme chiffre
-
-    private readonly List<string> _numero = new();
-
     internal void Lancer()
     {
-        Console.WriteLine("toto");
+        double nombreGrille = UtilitaireConsole.DemanderNombreFlotantEntreMinMax("Merci de saisir le nombre de grille voulue", 1.00, 10.00);
+        Ticket ticket = new(nombreGrille);
+
+        Grille grille = new();
+        grille.GenererGrille(nombreGrille);
+
+        Prix newPrix = new();
+        double prix = newPrix.RetournerPrix(ticket.NombreGrille);
+
+        Caisse caisse = new();
+        caisse.Encaisser(prix);
     }
 }
