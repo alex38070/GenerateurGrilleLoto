@@ -45,12 +45,12 @@ internal class Grille
             int item = grilleTriee[i];
 
             if (item < 10)
-                Console.Write($" {item}  ");
+                Console.Write($"  {item}");
             else
-                Console.Write($"{item}  ");
+                Console.Write($" {item}");
 
             if (i == 4)
-                Console.Write("* ");
+                Console.Write("  * ");
         }
     }
 

@@ -2,7 +2,7 @@
 
 //3. ⁠On encaisse un montant donné par le joueur supérieur au prix et inférieur à 100€
 //4. Et rend l’éventuelle monnaie
-internal class Caisse
+internal class Caisse : Prix
 {
     private readonly double _montantMax = 100.00;
 
