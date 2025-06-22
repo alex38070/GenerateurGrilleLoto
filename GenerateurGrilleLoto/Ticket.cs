@@ -4,9 +4,24 @@
     {
         internal double NombreGrille { get; set; } = nombreGrille;
 
-        //internal Ticket(Grille nombreGrille)
-        //{
-        //    NombreGrille = nombreGrille;
-        //}
+        internal void FormatTicket()
+        {
+            double NombreTicket = nombreGrille / 5;
+            Console.WriteLine();
+            DateTime dateTime = DateTime.Now;
+
+            Console.WriteLine($"Vendredi {dateTime.Day:00} / {dateTime.Month:00} / {dateTime.Year}");
+
+            for (int t = 1; t <= NombreTicket; t++)
+            {
+                Console.Write($"\r\nTicket {t:00} :\r\n");
+                for (int g = 1; g <= 5; g++)
+                {
+                    Console.Write($"\r\nGrille {g:00} :");
+                    Grille grille = new();
+                    grille.GenererGrille();
+                }
+            }
+        }
     }
 }

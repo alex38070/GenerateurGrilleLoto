@@ -2,19 +2,20 @@
 
 //3. ⁠On encaisse un montant donné par le joueur supérieur au prix et inférieur à 100€
 //4. Et rend l’éventuelle monnaie
-internal class Caisse : Prix
+internal class Caisse
 {
     private readonly double _montantMax = 100.00;
 
     internal void Encaisser(double prix)
     {
+        Console.WriteLine();
         double montant = PrendreMonnaie(prix);
         string monnaie = RendreMonnaie(prix, montant);
         Console.WriteLine(monnaie);
     }
 
     internal double PrendreMonnaie(double prix)
-        => UtilitaireConsole.DemanderNombreFlotantEntreMinMax("Merci de saisir un montant à encaisser", prix, _montantMax);
+        => UtilitaireConsole.DemanderNombreFlotantEntreMinMax("\n\rMerci de saisir un montant à encaisser", prix, _montantMax);
 
     internal string RendreMonnaie(double prix, double montant)
     {

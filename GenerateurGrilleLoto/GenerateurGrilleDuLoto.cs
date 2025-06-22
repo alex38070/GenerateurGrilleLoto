@@ -29,16 +29,15 @@ internal class GenerateurGrilleDuLoto
 {
     internal void Lancer()
     {
-        double nombreGrille = UtilitaireConsole.DemanderNombreFlotantEntreMinMax("Merci de saisir le nombre de grille voulue", 1.00, 10.00);
+        double nombreGrille = UtilitaireConsole.DemanderNombreFlotantEntreMinMax("Merci de saisir le nombre de grille voulue", 1.00, 100.00);
         Ticket ticket = new(nombreGrille);
-
-        Grille grille = new();
-        grille.GenererGrille(nombreGrille);
+        ticket.FormatTicket();
 
         Prix newPrix = new();
         double prix = newPrix.RetournerPrix(ticket.NombreGrille);
 
         Caisse caisse = new();
         caisse.Encaisser(prix);
+
     }
 }

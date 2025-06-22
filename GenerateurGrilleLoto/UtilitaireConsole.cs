@@ -5,8 +5,7 @@ internal static class UtilitaireConsole
     {
         while (true)
         {
-            Console.WriteLine();
-            Console.Write($"\r\n{message} entre {min} et {max} : ");
+            Console.Write($"{message} entre {min} et {max} : ");
             string saisie = Console.ReadLine() ?? string.Empty;
 
             if (double.TryParse(saisie, out double montant) && montant >= min && montant <= max)

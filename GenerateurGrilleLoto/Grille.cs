@@ -18,56 +18,46 @@ internal class Grille
     private readonly List<int> _numeros = Enumerable.Range(1, 50).ToList();
     private readonly List<int> _etoiles = Enumerable.Range(1, 12).ToList();
 
-    internal void GenererGrille(double nombreGrille)
-    {
-
-        for (int i = 1; i <= nombreGrille; i++)
-        {
-
-            Console.Write($"\r\nGrille {i} : ");
-            AfficherGrille();
-
-        }
-    }
-
-    internal void AfficherGrille()
+    internal void GenererGrille()
     {
         List<int> grilleNombre = [];
         List<int> grilleEtoile = [];
 
-        ObtenirNumeroDifferentAleatoire(grilleNombre);
+        ObtenirNumeroDifferentAleatoire(grilleNombre, 5);
         List<int> grilleNombreTrier = grilleNombre.OrderBy(item => item).ToList();
 
-        ObtenirEtoileAleatoire(grilleEtoile);
+        ObtenirEtoileDifferentAleatoire(grilleNombre, grilleEtoile, 2);
         List<int> grilleEtoileTrier = grilleEtoile.OrderBy(item => item).ToList();
 
-
-        for (int i = 0; i < grilleNombreTrier.Count; i++)
-        {
-            int item = grilleNombreTrier[i];
-
-            if (item < 10)
-                Console.Write($"  {item}");
-            else
-                Console.Write($" {item}");
-
-            if (i == 4)
-                Console.Write("  * ");
-        }
-
-        for (int i = 0; i < grilleEtoileTrier.Count; i++)
-        {
-            int item = grilleEtoileTrier[i];
-
-            if (item < 10)
-                Console.Write($"  {item}");
-            else
-                Console.Write($" {item}");
-        }
-
+        Affichage(grilleNombreTrier);
+        Affichage(grilleEtoileTrier);
     }
 
-    internal List<int> ObtenirNumeroDifferentAleatoire(List<int> grilleNombre)
+    //internal List<int> ObtenirEtoileDifferentAleatoire(List<int> grilleNombre, List<int> grilleEtoile, int combienNombre)
+    //{
+    //    do
+    //    {
+    //        int numero = _numeros[Random.Shared.Next(1, _etoiles.Count)];
+    //        if (combienNombre != 2)
+    //        {
+    //            if (!grilleNombre.Contains(numero))
+    //                grilleNombre.Add(numero);
+    //        }
+    //        else
+    //        {
+    //            if (!grilleNombre.Contains(numero) && !grilleEtoile.Contains(numero))
+    //                grilleEtoile.Add(numero);
+    //        }
+
+
+    //    } while (grilleNombre.Count < combienNombre);
+    //    if (combienNombre != 2)
+    //        return grilleNombre;
+    //    else return grilleEtoile;
+    //}
+
+
+    internal List<int> ObtenirNumeroDifferentAleatoire(List<int> grilleNombre, int combienNombre)
     {
         do
         {
@@ -75,22 +65,33 @@ internal class Grille
             if (!grilleNombre.Contains(numero))
                 grilleNombre.Add(numero);
 
-        } while (grilleNombre.Count < 5);
+        } while (grilleNombre.Count < combienNombre);
 
         return grilleNombre;
     }
 
-    internal List<int> ObtenirEtoileAleatoire(List<int> grilleEtoile)
+    internal List<int> ObtenirEtoileDifferentAleatoire(List<int> grilleNombre, List<int> grilleEtoile, int combienNombre)
     {
         do
         {
             int numero = _numeros[Random.Shared.Next(1, _etoiles.Count)];
-            if (!grilleEtoile.Contains(numero))
-                if (!grilleEtoile.Contains(numero))
-                    grilleEtoile.Add(numero);
+            if (!grilleNombre.Contains(numero) && !grilleEtoile.Contains(numero))
+                grilleEtoile.Add(numero);
 
-        } while (grilleEtoile.Count < 2);
+        } while (grilleEtoile.Count < combienNombre);
 
         return grilleEtoile;
+    }
+
+    internal void Affichage(List<int> ListAAfficher)
+    {
+        for (int i = 0; i < ListAAfficher.Count; i++)
+        {
+            int item = ListAAfficher[i];
+            Console.Write($"  {item:00}"); // :00 remplace => if (item < 10) Console.Write($" {item}");
+
+            if (i == 4)
+                Console.Write("  * ");
+        }
     }
 }
