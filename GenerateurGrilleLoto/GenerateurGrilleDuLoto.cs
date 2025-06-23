@@ -31,8 +31,7 @@ internal class GenerateurGrilleDuLoto
 {
     internal void Lancer()
     {
-        string choix = "1";
-
+        string choix = "2";
         do
         {
             if (choix == "2")
@@ -41,24 +40,27 @@ internal class GenerateurGrilleDuLoto
                 Utilisateur utilisateur = CreerNouvelleUtilisateur(); // Nouvelle objet pour nouveau utilisateur
                 utilisateurs.Add(utilisateur); // Ajout Utilisateur dans la Collection parente
                 UtilitaireConsole.VerifierConnection(utilisateur.Mail, utilisateur.MotDePasse);
-
-                double nombreGrille = UtilitaireConsole.DemanderNombreFlotantEntreMinMax("\r\nVeuillez saisir le nombre de grille voulue", 1.00, 100.00);
-                Ticket ticket = new(nombreGrille);
-                ticket.FormatTicket();
-
-                Prix newPrix = new();
-                double prix = newPrix.RetournerPrix(ticket.NombreGrille);
-
-                Caisse caisse = new();
-                caisse.Encaisser(prix);
             }
 
-            Console.WriteLine("Tappez 1 pour nouvelle commande");
+            double nombreGrille = UtilitaireConsole.DemanderNombreFlotantEntreMinMax("\nVeuillez saisir le nombre de grille voulue", 1.00, 100.00);
+            Ticket ticket = new(nombreGrille);
+            ticket.FormatTicket();
+
+            Prix newPrix = new();
+            double prix = newPrix.RetournerPrix(ticket.NombreGrille);
+
+            Caisse caisse = new();
+            caisse.Encaisser(prix);
+
+            Console.WriteLine("\r\nTappez 1 pour nouvelle commande");
             Console.WriteLine("Tappez 2 pour creer nouvelle utilisateur");
             Console.WriteLine("Tapper 3 pour quitter");
             choix = Console.ReadLine() ?? string.Empty;
 
-        } while (true);
+            if (choix == "3")
+                break;
+
+        } while (choix == "1" || choix == "2");
     }
 
     private Utilisateur CreerNouvelleUtilisateur()

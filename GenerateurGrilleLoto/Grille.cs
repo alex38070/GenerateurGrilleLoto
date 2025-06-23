@@ -91,7 +91,7 @@ internal class Grille
             Console.Write($"  {item:00}"); // :00 remplace => if (item < 10) Console.Write($" {item}");
 
             if (i == 4)
-                Console.Write("  * ");
+                Console.Write("  *");
         }
     }
 }

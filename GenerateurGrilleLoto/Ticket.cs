@@ -7,14 +7,12 @@
         internal void FormatTicket()
         {
             double nombreTicket = NombreGrille / 5;
-            Console.WriteLine();
             DateTime dateTime = DateTime.Now;
-
-            Console.WriteLine($"Vendredi {dateTime.Day:00} / {dateTime.Month:00} / {dateTime.Year}");
 
             for (int t = 1; t <= nombreTicket; t++)
             {
-                Console.Write($"\r\nTicket {t:00} :\r\n");
+                Console.WriteLine();
+                Console.Write($"\r\nTicket {t:00} :  Vendredi {dateTime.Day:00} / {dateTime.Month:00} / {dateTime.Year}  {dateTime.Hour}:{dateTime.Minute}:{dateTime.Second}\n");
 
                 for (int g = 1; g <= 5; g++)
                 {
