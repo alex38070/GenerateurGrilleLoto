@@ -1,4 +1,6 @@
-﻿namespace GenerateurGrilleLoto;
+﻿using System.Collections.ObjectModel;
+
+namespace GenerateurGrilleLoto;
 
 /*
 Expérience utilisateur :
@@ -29,15 +31,47 @@ internal class GenerateurGrilleDuLoto
 {
     internal void Lancer()
     {
-        double nombreGrille = UtilitaireConsole.DemanderNombreFlotantEntreMinMax("Merci de saisir le nombre de grille voulue", 1.00, 100.00);
-        Ticket ticket = new(nombreGrille);
-        ticket.FormatTicket();
+        string choix = "1";
 
-        Prix newPrix = new();
-        double prix = newPrix.RetournerPrix(ticket.NombreGrille);
+        do
+        {
+            if (choix == "2")
+            {
+                Collection<Utilisateur> utilisateurs = []; // Collection des Utilisateurs
+                Utilisateur utilisateur = CreerNouvelleUtilisateur(); // Nouvelle objet pour nouveau utilisateur
+                utilisateurs.Add(utilisateur); // Ajout Utilisateur dans la Collection parente
+                UtilitaireConsole.VerifierConnection(utilisateur.Mail, utilisateur.MotDePasse);
 
-        Caisse caisse = new();
-        caisse.Encaisser(prix);
+                double nombreGrille = UtilitaireConsole.DemanderNombreFlotantEntreMinMax("\r\nVeuillez saisir le nombre de grille voulue", 1.00, 100.00);
+                Ticket ticket = new(nombreGrille);
+                ticket.FormatTicket();
 
+                Prix newPrix = new();
+                double prix = newPrix.RetournerPrix(ticket.NombreGrille);
+
+                Caisse caisse = new();
+                caisse.Encaisser(prix);
+            }
+
+            Console.WriteLine("Tappez 1 pour nouvelle commande");
+            Console.WriteLine("Tappez 2 pour creer nouvelle utilisateur");
+            Console.WriteLine("Tapper 3 pour quitter");
+            choix = Console.ReadLine() ?? string.Empty;
+
+        } while (true);
+    }
+
+    private Utilisateur CreerNouvelleUtilisateur()
+    {
+        Console.Write("Veuillez saisir votre Prénom : ");
+        string prenom = Console.ReadLine() ?? string.Empty;
+        Console.Write("Veuillez saisir votre Nom : ");
+        string nom = Console.ReadLine() ?? string.Empty;
+        Console.Write("Veuillez saisir votre Mail : ");
+        string mail = Console.ReadLine() ?? string.Empty;
+        Console.Write("Veuillez saisir votre mot De Passe : ");
+        string motDePasse = Console.ReadLine() ?? string.Empty;
+
+        return new(prenom, nom, mail, motDePasse);
     }
 }

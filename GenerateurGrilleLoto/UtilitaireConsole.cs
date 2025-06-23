@@ -12,4 +12,18 @@ internal static class UtilitaireConsole
                 return montant;
         }
     }
+
+    internal static bool VerifierConnection(string utilisateurMail, string utilisateurMotDePasse)
+    {
+        while (true)
+        {
+            Console.Write("\r\nVeuillez saisir votre Identifiants de connection : ");
+            string saisieidentifiant = Console.ReadLine() ?? string.Empty;
+            Console.Write("Veuillez saisir votre Mot de passe : ");
+            string saisieMotDePasse = Console.ReadLine() ?? string.Empty;
+
+            if (saisieidentifiant == utilisateurMail && saisieMotDePasse == utilisateurMotDePasse)
+                return true;
+        }
+    }
 }
