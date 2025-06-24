@@ -1,4 +1,4 @@
-﻿namespace GenerateurGrilleLoto.Interface_UIilisateur;
+﻿namespace GenerateurGrilleEuroMillion.Interface_UIilisateur;
 internal interface IUtilitaireConsole
 {
     double DemanderNombreFlotantEntreMinMax(string message, double min, double max);
