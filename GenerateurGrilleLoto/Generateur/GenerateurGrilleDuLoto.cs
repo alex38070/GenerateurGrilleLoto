@@ -1,7 +1,9 @@
-﻿namespace GenerateurGrilleEuroMillion;
-using GenerateurGrilleEuroMillion.Réglement;
+﻿using GrilleEuroMillion.Interaction;
+using GrilleEuroMillion.Model;
+using GrilleEuroMillion.Reglement;
 using System.Collections.ObjectModel;
 
+namespace GrilleEuroMillion.Generateur;
 
 /*
 Expérience utilisateur :
@@ -30,24 +32,23 @@ On ne doit pas générer de grilles identiques lors d’une même génération d
 
 internal class GenerateurGrilleDuLoto
 {
-    private readonly InterfaceUtilitaire interfaceUtilitaire = new();
+    private readonly IInteractionUtilisateur _ui = new InteractionUtilisateurConsole();
     private readonly Grille grille = new();
 
     internal void Lancer()
     {
-
         string choix = "2";
         do
         {
             if (choix == "2")
             {
                 Collection<Utilisateur> utilisateurs = []; // Collection des Utilisateurs
-                Utilisateur utilisateur = CreerNouvelleUtilisateur(); // Nouvelle objet pour nouveau utilisateur
+                Utilisateur utilisateur = new(); // Nouvelle objet pour nouveau utilisateur
                 utilisateurs.Add(utilisateur); // Ajout Utilisateur dans la Collection parente
-                interfaceUtilitaire.VerifierConnection(utilisateur.Mail, utilisateur.MotDePasse, interfaceUtilitaire);
+                utilisateur.VerifierConnexion(utilisateur.Mail, utilisateur.MotDePasse);
             }
 
-            double nombreGrille = interfaceUtilitaire.DemanderNombreFlotantEntreMinMax("\nVeuillez saisir le nombre de grille voulue", 1.00, 100.00);
+            double nombreGrille = _ui.DemanderNombreFlotantEntreMinMax("\nVeuillez saisir le nombre de grille voulue", 1.00, 100.00);
             Ticket ticket = new(nombreGrille, grille);
             ticket.FormatTicket();
 
@@ -57,29 +58,15 @@ internal class GenerateurGrilleDuLoto
             Caisse caisse = new();
             caisse.Encaisser(prix);
 
-            interfaceUtilitaire.AffichageTexteRetourLigne("\r\nTappez 1 pour nouvelle commande");
-            interfaceUtilitaire.AffichageTexteRetourLigne("Tappez 2 pour creer nouvelle utilisateur");
-            interfaceUtilitaire.AffichageTexteRetourLigne("Tapper 3 pour quitter");
-            interfaceUtilitaire.AffichageTexte("Votre choix est : ");
-            choix = interfaceUtilitaire.DemanderTexteRetourLigne();
+            _ui.AffichageTexteRetourLigne("\r\nTappez 1 pour nouvelle commande");
+            _ui.AffichageTexteRetourLigne("Tappez 2 pour creer nouvelle utilisateur");
+            _ui.AffichageTexteRetourLigne("Tapper 3 pour quitter");
+            _ui.AffichageTexte("Votre choix est : ");
+            choix = _ui.DemanderTexteRetourLigne();
 
             if (choix == "3")
                 break;
 
         } while (choix == "1" || choix == "2");
-    }
-
-    internal Utilisateur CreerNouvelleUtilisateur()
-    {
-        interfaceUtilitaire.AffichageTexte("Veuillez saisir votre Prénom : ");
-        string prenom = interfaceUtilitaire.DemanderTexteRetourLigne();
-        interfaceUtilitaire.AffichageTexte("Veuillez saisir votre Nom : ");
-        string nom = interfaceUtilitaire.DemanderTexteRetourLigne();
-        interfaceUtilitaire.AffichageTexte("Veuillez saisir votre Mail : ");
-        string mail = interfaceUtilitaire.DemanderTexteRetourLigne();
-        interfaceUtilitaire.AffichageTexte("Veuillez saisir votre mot De Passe : ");
-        string motDePasse = interfaceUtilitaire.DemanderTexteRetourLigne();
-
-        return new(prenom, nom, mail, motDePasse);
     }
 }

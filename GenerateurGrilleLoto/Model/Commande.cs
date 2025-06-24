@@ -1,4 +1,4 @@
-﻿namespace GenerateurGrilleEuroMillion;
+﻿namespace GrilleEuroMillion.Model;
 
 internal class Commande
 {

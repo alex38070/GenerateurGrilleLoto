@@ -1,4 +1,4 @@
-﻿namespace GenerateurGrilleEuroMillion;
+﻿namespace GrilleEuroMillion.Model;
 
 //on affiche les grilles sous le format :
 

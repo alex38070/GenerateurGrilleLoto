@@ -1,14 +1,12 @@
-﻿namespace GenerateurGrilleEuroMillion.Interface_UIilisateur;
-internal interface IUtilitaireConsole
+﻿namespace GrilleEuroMillion.Interaction;
+
+internal interface IInteractionUtilisateur
 {
     double DemanderNombreFlotantEntreMinMax(string message, double min, double max);
-
-    bool VerifierConnection(string utilisateurMail, string utilisateurMotDePasse);
 
     void AffichageTexte(string message);
 
     void AffichageTexteRetourLigne(string message);
 
     string DemanderTexteRetourLigne();
-
 }

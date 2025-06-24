@@ -1,8 +1,10 @@
-﻿namespace GenerateurGrilleEuroMillion.Réglement;
+﻿using GrilleEuroMillion.Interaction;
+
+namespace GrilleEuroMillion.Reglement;
 
 internal class Caisse
 {
-    private readonly InterfaceUtilitaire _utilitaireConsole = new();
+    private readonly InteractionUtilisateurConsole _utilitaireConsole = new();
     private readonly double _montantMax = 100.00;
     internal void Encaisser(double prix)
     {
