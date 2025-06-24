@@ -1,7 +1,7 @@
-﻿using GenerateurGrilleLoto.Payement;
+﻿namespace GenerateurGrilleEuroMillion;
+using GenerateurGrilleEuroMillion.Réglement;
 using System.Collections.ObjectModel;
 
-namespace GenerateurGrilleLoto.GenerateurGrilleEuroMillion;
 
 /*
 Expérience utilisateur :
@@ -30,8 +30,12 @@ On ne doit pas générer de grilles identiques lors d’une même génération d
 
 internal class GenerateurGrilleDuLoto
 {
+    private readonly InterfaceUtilitaire interfaceUtilitaire = new();
+    private readonly Grille grille = new();
+
     internal void Lancer()
     {
+
         string choix = "2";
         do
         {
@@ -40,11 +44,11 @@ internal class GenerateurGrilleDuLoto
                 Collection<Utilisateur> utilisateurs = []; // Collection des Utilisateurs
                 Utilisateur utilisateur = CreerNouvelleUtilisateur(); // Nouvelle objet pour nouveau utilisateur
                 utilisateurs.Add(utilisateur); // Ajout Utilisateur dans la Collection parente
-                UtilitaireConsole.VerifierConnection(utilisateur.Mail, utilisateur.MotDePasse);
+                interfaceUtilitaire.VerifierConnection(utilisateur.Mail, utilisateur.MotDePasse, interfaceUtilitaire);
             }
 
-            double nombreGrille = UtilitaireConsole.DemanderNombreFlotantEntreMinMax("\nVeuillez saisir le nombre de grille voulue", 1.00, 100.00);
-            Ticket ticket = new(nombreGrille);
+            double nombreGrille = interfaceUtilitaire.DemanderNombreFlotantEntreMinMax("\nVeuillez saisir le nombre de grille voulue", 1.00, 100.00);
+            Ticket ticket = new(nombreGrille, grille);
             ticket.FormatTicket();
 
             Prix newPrix = new();
@@ -53,9 +57,9 @@ internal class GenerateurGrilleDuLoto
             Caisse caisse = new();
             caisse.Encaisser(prix);
 
-            UtilitaireConsole.AffichageTexte("\r\nTappez 1 pour nouvelle commande");
-            UtilitaireConsole.AffichageTexte("Tappez 2 pour creer nouvelle utilisateur");
-            UtilitaireConsole.AffichageTexte("Tapper 3 pour quitter");
+            interfaceUtilitaire.AffichageTexte("\r\nTappez 1 pour nouvelle commande");
+            interfaceUtilitaire.AffichageTexte("Tappez 2 pour creer nouvelle utilisateur");
+            interfaceUtilitaire.AffichageTexte("Tapper 3 pour quitter");
             choix = Console.ReadLine() ?? string.Empty;
 
             if (choix == "3")
@@ -66,13 +70,13 @@ internal class GenerateurGrilleDuLoto
 
     internal Utilisateur CreerNouvelleUtilisateur()
     {
-        UtilitaireConsole.AffichageTexte("Veuillez saisir votre Prénom : ");
+        interfaceUtilitaire.AffichageTexte("Veuillez saisir votre Prénom : ");
         string prenom = Console.ReadLine() ?? string.Empty;
-        UtilitaireConsole.AffichageTexte("Veuillez saisir votre Nom : ");
+        interfaceUtilitaire.AffichageTexte("Veuillez saisir votre Nom : ");
         string nom = Console.ReadLine() ?? string.Empty;
-        UtilitaireConsole.AffichageTexte("Veuillez saisir votre Mail : ");
+        interfaceUtilitaire.AffichageTexte("Veuillez saisir votre Mail : ");
         string mail = Console.ReadLine() ?? string.Empty;
-        UtilitaireConsole.AffichageTexte("Veuillez saisir votre mot De Passe : ");
+        interfaceUtilitaire.AffichageTexte("Veuillez saisir votre mot De Passe : ");
         string motDePasse = Console.ReadLine() ?? string.Empty;
 
         return new(prenom, nom, mail, motDePasse);

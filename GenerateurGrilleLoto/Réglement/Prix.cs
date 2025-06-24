@@ -1,4 +1,4 @@
-﻿namespace GenerateurGrilleLoto.Payement;
+﻿namespace GenerateurGrilleEuroMillion.Réglement;
 
 internal class Prix
 {

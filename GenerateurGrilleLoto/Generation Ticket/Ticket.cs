@@ -1,8 +1,10 @@
-﻿namespace GenerateurGrilleLoto
+﻿namespace GenerateurGrilleEuroMillion
 {
-    internal class Ticket(double nombreGrille) // , Grille newGrille
+    internal class Ticket(double nombreGrille, Grille grille) // , Grille newGrille
     {
         internal double NombreGrille { get; set; } = nombreGrille;
+        internal Grille Grille { get; set; } = grille;
+
         //internal Grille NewGrille { get; set; } = newGrille;
 
         internal void FormatTicket()

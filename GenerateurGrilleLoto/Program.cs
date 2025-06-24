@@ -1,6 +1,4 @@
-﻿using GenerateurGrilleLoto.GenerateurGrilleEuroMillion;
-
-namespace GenerateurGrilleLoto;
+﻿namespace GenerateurGrilleEuroMillion;
 
 internal class Program
 {

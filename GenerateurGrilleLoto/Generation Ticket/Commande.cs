@@ -1,4 +1,4 @@
-﻿namespace GenerateurGrilleLoto;
+﻿namespace GenerateurGrilleEuroMillion;
 
 internal class Commande
 {

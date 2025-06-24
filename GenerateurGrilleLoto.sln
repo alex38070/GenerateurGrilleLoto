@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36212.18 d17.14
+VisualStudioVersion = 17.14.36212.18
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerateurGrilleLoto", "GenerateurGrilleLoto\GenerateurGrilleLoto.csproj", "{6C4A8CAF-05FA-45B7-B7CD-C0376B62E3B9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerateurGrilleEuroMillion", "GenerateurGrilleLoto\GenerateurGrilleEuroMillion.csproj", "{6C4A8CAF-05FA-45B7-B7CD-C0376B62E3B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

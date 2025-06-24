@@ -1,4 +1,4 @@
-﻿namespace GenerateurGrilleLoto;
+﻿namespace GenerateurGrilleEuroMillion;
 
 //on affiche les grilles sous le format :
 

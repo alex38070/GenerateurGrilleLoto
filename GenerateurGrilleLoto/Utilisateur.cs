@@ -1,4 +1,4 @@
-﻿namespace GenerateurGrilleLoto;
+﻿namespace GenerateurGrilleEuroMillion;
 
 internal class Utilisateur(string prenom, string nom, string mail, string motDePasse)
 {

@@ -1,11 +1,9 @@
-﻿namespace GenerateurGrilleLoto.Payement;
+﻿namespace GenerateurGrilleEuroMillion.Réglement;
 
-//3. ⁠On encaisse un montant donné par le joueur supérieur au prix et inférieur à 100€
-//4. Et rend l’éventuelle monnaie
 internal class Caisse
 {
+    private readonly InterfaceUtilitaire _utilitaireConsole = new();
     private readonly double _montantMax = 100.00;
-
     internal void Encaisser(double prix)
     {
         Console.WriteLine();
@@ -15,7 +13,7 @@ internal class Caisse
     }
 
     internal double PrendreMonnaie(double prix)
-        => UtilitaireConsole.DemanderNombreFlotantEntreMinMax("\n\rMerci de saisir un montant à encaisser", prix, _montantMax);
+        => _utilitaireConsole.DemanderNombreFlotantEntreMinMax("\n\rMerci de saisir un montant à encaisser", prix, _montantMax);
 
     internal string RendreMonnaie(double prix, double montant)
     {
