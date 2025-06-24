@@ -21,7 +21,7 @@ internal class Utilisateur
         MotDePasse = _ui.DemanderString();
     }
 
-    private IInteractionUtilisateur _ui = new InteractionUtilisateurConsole();
+    private readonly IInteractionUtilisateur _ui = new InteractionUtilisateurConsole();
 
     public bool VerifierConnexion(string utilisateurMail, string utilisateurMotDePasse)
     {
