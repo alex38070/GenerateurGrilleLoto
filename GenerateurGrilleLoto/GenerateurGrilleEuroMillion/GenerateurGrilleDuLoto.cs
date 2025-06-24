@@ -57,10 +57,11 @@ internal class GenerateurGrilleDuLoto
             Caisse caisse = new();
             caisse.Encaisser(prix);
 
-            interfaceUtilitaire.AffichageTexte("\r\nTappez 1 pour nouvelle commande");
-            interfaceUtilitaire.AffichageTexte("Tappez 2 pour creer nouvelle utilisateur");
-            interfaceUtilitaire.AffichageTexte("Tapper 3 pour quitter");
-            choix = Console.ReadLine() ?? string.Empty;
+            interfaceUtilitaire.AffichageTexteRetourLigne("\r\nTappez 1 pour nouvelle commande");
+            interfaceUtilitaire.AffichageTexteRetourLigne("Tappez 2 pour creer nouvelle utilisateur");
+            interfaceUtilitaire.AffichageTexteRetourLigne("Tapper 3 pour quitter");
+            interfaceUtilitaire.AffichageTexte("Votre choix est : ");
+            choix = interfaceUtilitaire.DemanderTexteRetourLigne();
 
             if (choix == "3")
                 break;
@@ -71,13 +72,13 @@ internal class GenerateurGrilleDuLoto
     internal Utilisateur CreerNouvelleUtilisateur()
     {
         interfaceUtilitaire.AffichageTexte("Veuillez saisir votre Prénom : ");
-        string prenom = Console.ReadLine() ?? string.Empty;
+        string prenom = interfaceUtilitaire.DemanderTexteRetourLigne();
         interfaceUtilitaire.AffichageTexte("Veuillez saisir votre Nom : ");
-        string nom = Console.ReadLine() ?? string.Empty;
+        string nom = interfaceUtilitaire.DemanderTexteRetourLigne();
         interfaceUtilitaire.AffichageTexte("Veuillez saisir votre Mail : ");
-        string mail = Console.ReadLine() ?? string.Empty;
+        string mail = interfaceUtilitaire.DemanderTexteRetourLigne();
         interfaceUtilitaire.AffichageTexte("Veuillez saisir votre mot De Passe : ");
-        string motDePasse = Console.ReadLine() ?? string.Empty;
+        string motDePasse = interfaceUtilitaire.DemanderTexteRetourLigne();
 
         return new(prenom, nom, mail, motDePasse);
     }
