@@ -2,7 +2,7 @@
 
 internal class InteractionUtilisateurConsole : IInteractionUtilisateur
 {
-    public double DemanderNombreFlotantEntreMinMax(string message, double min, double max)
+    public double DemanderDoubleEntreMinMax(string message, double min, double max)
     {
         while (true)
         {
@@ -14,17 +14,17 @@ internal class InteractionUtilisateurConsole : IInteractionUtilisateur
         }
     }
 
-    public void AffichageTexte(string message)
+    public void AfficherString(string message)
     {
         Console.Write(message);
     }
 
-    public void AffichageTexteRetourLigne(string message)
+    public void AfficherStringLine(string message)
     {
         Console.WriteLine(message);
     }
 
-    public string DemanderTexteRetourLigne()
+    public string DemanderString()
     {
         return Console.ReadLine() ?? string.Empty;
     }

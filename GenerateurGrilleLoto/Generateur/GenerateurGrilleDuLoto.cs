@@ -1,7 +1,6 @@
 ﻿using GrilleEuroMillion.Interaction;
 using GrilleEuroMillion.Model;
 using GrilleEuroMillion.Reglement;
-using System.Collections.ObjectModel;
 
 namespace GrilleEuroMillion.Generateur;
 
@@ -42,13 +41,13 @@ internal class GenerateurGrilleDuLoto
         {
             if (choix == "2")
             {
-                Collection<Utilisateur> utilisateurs = []; // Collection des Utilisateurs
+                List<Utilisateur> utilisateurs = []; // Collection des Utilisateurs
                 Utilisateur utilisateur = new(); // Nouvelle objet pour nouveau utilisateur
                 utilisateurs.Add(utilisateur); // Ajout Utilisateur dans la Collection parente
                 utilisateur.VerifierConnexion(utilisateur.Mail, utilisateur.MotDePasse);
             }
 
-            double nombreGrille = _ui.DemanderNombreFlotantEntreMinMax("\nVeuillez saisir le nombre de grille voulue", 1.00, 100.00);
+            double nombreGrille = _ui.DemanderDoubleEntreMinMax("\nVeuillez saisir le nombre de grille voulue", 1.00, 100.00);
             Ticket ticket = new(nombreGrille, grille);
             ticket.FormatTicket();
 
@@ -58,11 +57,11 @@ internal class GenerateurGrilleDuLoto
             Caisse caisse = new();
             caisse.Encaisser(prix);
 
-            _ui.AffichageTexteRetourLigne("\r\nTappez 1 pour nouvelle commande");
-            _ui.AffichageTexteRetourLigne("Tappez 2 pour creer nouvelle utilisateur");
-            _ui.AffichageTexteRetourLigne("Tapper 3 pour quitter");
-            _ui.AffichageTexte("Votre choix est : ");
-            choix = _ui.DemanderTexteRetourLigne();
+            _ui.AfficherStringLine("\r\nTappez 1 pour nouvelle commande");
+            _ui.AfficherStringLine("Tappez 2 pour creer nouvelle utilisateur");
+            _ui.AfficherStringLine("Tapper 3 pour quitter");
+            _ui.AfficherString("Votre choix est : ");
+            choix = _ui.DemanderString();
 
             if (choix == "3")
                 break;

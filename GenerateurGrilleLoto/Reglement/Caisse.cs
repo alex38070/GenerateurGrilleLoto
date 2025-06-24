@@ -15,7 +15,7 @@ internal class Caisse
     }
 
     internal double PrendreMonnaie(double prix)
-        => _utilitaireConsole.DemanderNombreFlotantEntreMinMax("\n\rMerci de saisir un montant à encaisser", prix, _montantMax);
+        => _utilitaireConsole.DemanderDoubleEntreMinMax("\n\rMerci de saisir un montant à encaisser", prix, _montantMax);
 
     internal string RendreMonnaie(double prix, double montant)
     {

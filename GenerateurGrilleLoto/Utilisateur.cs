@@ -41,10 +41,10 @@ internal class Utilisateur
     {
         while (true)
         {
-            _ui.AffichageTexte("\r\nVeuillez saisir votre Identifiant de connexion : ");
-            string saisieidentifiant = _ui.DemanderTexteRetourLigne();
-            _ui.AffichageTexte("Veuillez saisir votre Mot de passe : ");
-            string saisieMotDePasse = _ui.DemanderTexteRetourLigne();
+            _ui.AfficherString("\r\nVeuillez saisir votre Identifiant de connexion : ");
+            string saisieidentifiant = _ui.DemanderString();
+            _ui.AfficherString("Veuillez saisir votre Mot de passe : ");
+            string saisieMotDePasse = _ui.DemanderString();
 
             if (saisieidentifiant == utilisateurMail && saisieMotDePasse == utilisateurMotDePasse)
                 return true;

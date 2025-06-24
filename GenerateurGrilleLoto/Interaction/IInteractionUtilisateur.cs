@@ -2,11 +2,11 @@
 
 internal interface IInteractionUtilisateur
 {
-    double DemanderNombreFlotantEntreMinMax(string message, double min, double max);
+    double DemanderDoubleEntreMinMax(string message, double min, double max);
 
-    void AffichageTexte(string message);
+    void AfficherString(string message);
 
-    void AffichageTexteRetourLigne(string message);
+    void AfficherStringLine(string message);
 
-    string DemanderTexteRetourLigne();
+    string DemanderString();
 }
