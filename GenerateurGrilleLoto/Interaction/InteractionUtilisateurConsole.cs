@@ -6,8 +6,8 @@ internal class InteractionUtilisateurConsole : IInteractionUtilisateur
     {
         while (true)
         {
-            Console.Write($"{message} entre {min} et {max} : ");
-            string saisie = Console.ReadLine() ?? string.Empty;
+            AfficherString($"{message} entre {min} et {max} : ");
+            string saisie = DemanderString();
 
             if (double.TryParse(saisie, out double montant) && montant >= min && montant <= max)
                 return montant;

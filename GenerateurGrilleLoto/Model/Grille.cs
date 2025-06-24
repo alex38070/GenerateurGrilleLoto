@@ -1,4 +1,6 @@
-﻿namespace GrilleEuroMillion.Model;
+﻿using GrilleEuroMillion.Interaction;
+
+namespace GrilleEuroMillion.Model;
 
 //on affiche les grilles sous le format :
 
@@ -17,6 +19,7 @@ internal class Grille
 {
     private readonly List<int> _numeros = Enumerable.Range(1, 50).ToList();
     private readonly List<int> _etoiles = Enumerable.Range(1, 12).ToList();
+    internal IInteractionUtilisateur _ui = new InteractionUtilisateurConsole();
 
     internal void GenererGrille()
     {
@@ -64,10 +67,10 @@ internal class Grille
         for (int i = 0; i < ListAAfficher.Count; i++)
         {
             int item = ListAAfficher[i];
-            Console.Write($"  {item:00}"); // :00 remplace => if (item < 10) Console.Write($" {item}");
+            _ui.AfficherString($"  {item:00}");
 
             if (i == 4)
-                Console.Write("  *");
+                _ui.AfficherString("  *");
         }
     }
 }

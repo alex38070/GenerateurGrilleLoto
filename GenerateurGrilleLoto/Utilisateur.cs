@@ -11,31 +11,17 @@ internal class Utilisateur
 
     internal Utilisateur()
     {
-        Console.Write("Veuillez saisir votre Prénom : ");
-        Prenom = Console.ReadLine() ?? string.Empty;
-        Console.Write("Veuillez saisir votre Nom : ");
-        Nom = Console.ReadLine() ?? string.Empty;
-        Console.Write("Veuillez saisir votre Mail : ");
-        Mail = Console.ReadLine() ?? string.Empty;
-        Console.Write("Veuillez saisir votre mot De Passe : ");
-        MotDePasse = Console.ReadLine() ?? string.Empty;
+        _ui.AfficherString("Veuillez saisir votre Prénom : ");
+        Prenom = _ui.DemanderString();
+        _ui.AfficherString("Veuillez saisir votre Nom : ");
+        Nom = _ui.DemanderString();
+        _ui.AfficherString("Veuillez saisir votre Mail : ");
+        Mail = _ui.DemanderString();
+        _ui.AfficherString("Veuillez saisir votre mot De Passe : ");
+        MotDePasse = _ui.DemanderString();
     }
 
     private IInteractionUtilisateur _ui = new InteractionUtilisateurConsole();
-
-    //internal Utilisateur CreerNouvelleUtilisateur()
-    //{
-    //    Console.Write("Veuillez saisir votre Prénom : ");
-    //    string prenom = Console.ReadLine() ?? string.Empty;
-    //    Console.Write("Veuillez saisir votre Nom : ");
-    //    string nom = Console.ReadLine() ?? string.Empty;
-    //    Console.Write("Veuillez saisir votre Mail : ");
-    //    string mail = Console.ReadLine() ?? string.Empty;
-    //    Console.Write("Veuillez saisir votre mot De Passe : ");
-    //    string motDePasse = Console.ReadLine() ?? string.Empty;
-
-    //    return new(prenom, nom, mail, motDePasse);
-    //}
 
     public bool VerifierConnexion(string utilisateurMail, string utilisateurMotDePasse)
     {
