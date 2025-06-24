@@ -33,30 +33,6 @@ internal class Grille
         Affichage(grilleEtoileTrier);
     }
 
-    //internal List<int> ObtenirEtoileDifferentAleatoire(List<int> grilleNombre, List<int> grilleEtoile, int combienNombre)
-    //{
-    //    do
-    //    {
-    //        int numero = _numeros[Random.Shared.Next(1, _etoiles.Count)];
-    //        if (combienNombre != 2)
-    //        {
-    //            if (!grilleNombre.Contains(numero))
-    //                grilleNombre.Add(numero);
-    //        }
-    //        else
-    //        {
-    //            if (!grilleNombre.Contains(numero) && !grilleEtoile.Contains(numero))
-    //                grilleEtoile.Add(numero);
-    //        }
-
-
-    //    } while (grilleNombre.Count < combienNombre);
-    //    if (combienNombre != 2)
-    //        return grilleNombre;
-    //    else return grilleEtoile;
-    //}
-
-
     internal List<int> ObtenirNumeroDifferentAleatoire(List<int> grilleNombre, int combienNombre)
     {
         do

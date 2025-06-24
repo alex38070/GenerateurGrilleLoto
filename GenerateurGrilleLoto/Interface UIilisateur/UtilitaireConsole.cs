@@ -17,13 +17,28 @@ internal static class UtilitaireConsole
     {
         while (true)
         {
-            Console.Write("\r\nVeuillez saisir votre Identifiants de connection : ");
+            UtilitaireConsole.AffichageTexte("\r\nVeuillez saisir votre Identifiants de connection : ");
             string saisieidentifiant = Console.ReadLine() ?? string.Empty;
-            Console.Write("Veuillez saisir votre Mot de passe : ");
-            string saisieMotDePasse = Console.ReadLine() ?? string.Empty;
+            UtilitaireConsole.AffichageTexte("Veuillez saisir votre Mot de passe : ");
+            string saisieMotDePasse = UtilitaireConsole.DemanderTexteRetourLigne();
 
             if (saisieidentifiant == utilisateurMail && saisieMotDePasse == utilisateurMotDePasse)
                 return true;
         }
+    }
+
+    internal static void AffichageTexte(string message)
+    {
+        Console.Write(message);
+    }
+
+    internal static void AffichageTexteRetourLigne(string message)
+    {
+        Console.WriteLine(message);
+    }
+
+    internal static string DemanderTexteRetourLigne()
+    {
+        return Console.ReadLine() ?? string.Empty;
     }
 }

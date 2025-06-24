@@ -1,4 +1,4 @@
-﻿namespace GenerateurGrilleLoto;
+﻿namespace GenerateurGrilleLoto.Payement;
 
 //3. ⁠On encaisse un montant donné par le joueur supérieur au prix et inférieur à 100€
 //4. Et rend l’éventuelle monnaie
@@ -21,6 +21,6 @@ internal class Caisse
     {
         double monnaie = montant - prix;
 
-        return (monnaie == 0) ? "Merci pour l' appoint" : "Voici votre monnaie : " + monnaie;
+        return monnaie == 0 ? "Merci pour l' appoint" : "Voici votre monnaie : " + monnaie;
     }
 }

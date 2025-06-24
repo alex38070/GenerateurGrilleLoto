@@ -1,6 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using GenerateurGrilleLoto.Payement;
+using System.Collections.ObjectModel;
 
-namespace GenerateurGrilleLoto;
+namespace GenerateurGrilleLoto.GenerateurGrilleEuroMillion;
 
 /*
 Expérience utilisateur :
@@ -52,9 +53,9 @@ internal class GenerateurGrilleDuLoto
             Caisse caisse = new();
             caisse.Encaisser(prix);
 
-            Console.WriteLine("\r\nTappez 1 pour nouvelle commande");
-            Console.WriteLine("Tappez 2 pour creer nouvelle utilisateur");
-            Console.WriteLine("Tapper 3 pour quitter");
+            UtilitaireConsole.AffichageTexte("\r\nTappez 1 pour nouvelle commande");
+            UtilitaireConsole.AffichageTexte("Tappez 2 pour creer nouvelle utilisateur");
+            UtilitaireConsole.AffichageTexte("Tapper 3 pour quitter");
             choix = Console.ReadLine() ?? string.Empty;
 
             if (choix == "3")
@@ -63,15 +64,15 @@ internal class GenerateurGrilleDuLoto
         } while (choix == "1" || choix == "2");
     }
 
-    private Utilisateur CreerNouvelleUtilisateur()
+    internal Utilisateur CreerNouvelleUtilisateur()
     {
-        Console.Write("Veuillez saisir votre Prénom : ");
+        UtilitaireConsole.AffichageTexte("Veuillez saisir votre Prénom : ");
         string prenom = Console.ReadLine() ?? string.Empty;
-        Console.Write("Veuillez saisir votre Nom : ");
+        UtilitaireConsole.AffichageTexte("Veuillez saisir votre Nom : ");
         string nom = Console.ReadLine() ?? string.Empty;
-        Console.Write("Veuillez saisir votre Mail : ");
+        UtilitaireConsole.AffichageTexte("Veuillez saisir votre Mail : ");
         string mail = Console.ReadLine() ?? string.Empty;
-        Console.Write("Veuillez saisir votre mot De Passe : ");
+        UtilitaireConsole.AffichageTexte("Veuillez saisir votre mot De Passe : ");
         string motDePasse = Console.ReadLine() ?? string.Empty;
 
         return new(prenom, nom, mail, motDePasse);
