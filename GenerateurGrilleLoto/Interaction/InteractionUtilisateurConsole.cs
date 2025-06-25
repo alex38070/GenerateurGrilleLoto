@@ -1,4 +1,6 @@
-﻿namespace GrilleEuroMillion.Interaction;
+﻿using GrilleEuroMillion.Interface;
+
+namespace GrilleEuroMillion.Interaction;
 
 internal class InteractionUtilisateurConsole : IInteractionUtilisateur
 {

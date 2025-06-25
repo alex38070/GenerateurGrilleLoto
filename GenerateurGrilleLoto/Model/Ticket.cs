@@ -1,4 +1,5 @@
 ﻿using GrilleEuroMillion.Interaction;
+using GrilleEuroMillion.Interface;
 
 namespace GrilleEuroMillion.Model;
 

@@ -1,4 +1,5 @@
 ﻿using GrilleEuroMillion.Interaction;
+using GrilleEuroMillion.Interface;
 using GrilleEuroMillion.Model;
 using GrilleEuroMillion.Reglement;
 
