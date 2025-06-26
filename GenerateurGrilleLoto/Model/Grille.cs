@@ -22,7 +22,9 @@ internal class Grille
     private readonly List<int> _etoiles = Enumerable.Range(1, 12).ToList();
     internal IInteractionUtilisateur _ui = new InteractionUtilisateurConsole();
 
-    internal void GenererGrille()
+
+
+    internal Grille()
     {
         List<int> grilleNombre = [];
         List<int> grilleEtoile = [];
