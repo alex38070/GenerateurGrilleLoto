@@ -24,6 +24,23 @@ internal class Commande()
                 return true;
         }
     }
+    internal void AffichageTicket(List<Grille> grilles)
+    {
+        DateTime dateTime = DateTime.Now;
+
+        _ui.AfficherString($"\r\nTicket 1 :  Vendredi {dateTime.Day:00} / {dateTime.Month:00} / {dateTime.Year}  {dateTime.Hour}:{dateTime.Minute}:{dateTime.Second}\n");
+        _ui.AfficherStringLine("");
+
+        for (int g = 1; g <= grilles.Count; g++)
+        {
+            _ui.AfficherString($"\r\nGrille {g:00} :");
+            Grille grille = new();
+            grilles.Add(grille);
+        }
+
+
+    }
+
 
 
 }

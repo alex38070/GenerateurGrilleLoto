@@ -1,13 +1,12 @@
 ﻿namespace GrilleEuroMillion;
 
-internal class Utilisateur
+internal class Utilisateur(string prenom, string nom, string mail, string motDePasse, double montantCaisse)
 {
-    internal string Prenom { get; set; }
-    internal string Nom { get; set; }
-    internal string Mail { get; set; }
-    internal string MotDePasse { get; set; }
-    internal double MontantCaisse { get; set; }
-
+    internal string Prenom { get; set; } = prenom;
+    internal string Nom { get; set; } = nom;
+    internal string Mail { get; set; } = mail;
+    internal string MotDePasse { get; set; } = motDePasse;
+    internal double MontantCaisse { get; set; } = montantCaisse;
 
     //internal Utilisateur()
     //{

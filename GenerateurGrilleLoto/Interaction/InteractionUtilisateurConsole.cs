@@ -30,4 +30,10 @@ internal class InteractionUtilisateurConsole : IInteractionUtilisateur
     {
         return Console.ReadLine() ?? string.Empty;
     }
+
+    public double NombreGrille(double choixTotalDeGrille, double nombreGrille)
+    {
+        return (choixTotalDeGrille + nombreGrille);
+    }
+
 }

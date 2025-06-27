@@ -39,25 +39,25 @@ internal class Grille
         Affichage(grilleEtoileTrier);
     }
 
-    internal List<int> ObtenirNumeroDifferentAleatoire(List<int> grilleNombre, int combienNombre)
+    internal List<int> ObtenirNumeroDifferentAleatoire(List<int> grilleNumeros, int combienNombre)
     {
         do
         {
             int numero = _numeros[Random.Shared.Next(1, _numeros.Count)];
-            if (!grilleNombre.Contains(numero))
-                grilleNombre.Add(numero);
+            if (!grilleNumeros.Contains(numero))
+                grilleNumeros.Add(numero);
 
-        } while (grilleNombre.Count < combienNombre);
+        } while (grilleNumeros.Count < combienNombre);
 
-        return grilleNombre;
+        return grilleNumeros;
     }
 
-    internal List<int> ObtenirEtoileDifferentAleatoire(List<int> grilleNombre, List<int> grilleEtoile, int combienNombre)
+    internal List<int> ObtenirEtoileDifferentAleatoire(List<int> grilleNumeros, List<int> grilleEtoile, int combienNombre)
     {
         do
         {
             int numero = _numeros[Random.Shared.Next(1, _etoiles.Count)];
-            if (!grilleNombre.Contains(numero) && !grilleEtoile.Contains(numero))
+            if (!grilleNumeros.Contains(numero) && !grilleEtoile.Contains(numero))
                 grilleEtoile.Add(numero);
 
         } while (grilleEtoile.Count < combienNombre);

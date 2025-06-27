@@ -29,17 +29,21 @@ internal class Ticket()
     //    }
     //}
 
-    internal void FormatTicket(double nombreGrille)
+    internal void FormatTicket() // double nombreGrille
     {
         DateTime dateTime = DateTime.Now;
-        Grille grille = new();
-
+        _ui.AfficherString($"\r\nTicket 1 :  {dateTime:dddd} {dateTime.Day:00} / {dateTime.Month:00} / {dateTime.Year}  {dateTime.Hour:00}:{dateTime.Minute:00}:{dateTime.Second:00}\n");
+        //AffichageGrille(nombreGrille);
         _ui.AfficherStringLine("");
-        _ui.AfficherString($"\r\nTicket 1 :  Vendredi {dateTime.Day:00} / {dateTime.Month:00} / {dateTime.Year}  {dateTime.Hour}:{dateTime.Minute}:{dateTime.Second}\n");
 
     }
     internal void AffichageGrille(double nombreGrille)
     {
+        for (int g = 1; g <= nombreGrille; g++)
+        {
+            _ui.AfficherString($"\r\nGrille {g:00} :");
+            Grille grille = new();
+        }
 
     }
 }
