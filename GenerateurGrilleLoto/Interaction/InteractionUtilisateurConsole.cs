@@ -9,7 +9,7 @@ internal class InteractionUtilisateurConsole : IInteractionUtilisateur
         while (true)
         {
             AfficherString($"{message} entre {min} et {max} : ");
-            string saisie = DemanderString();
+            string saisie = DemanderString("");
 
             if (double.TryParse(saisie, out double montant) && montant >= min && montant <= max)
                 return montant;
@@ -26,9 +26,40 @@ internal class InteractionUtilisateurConsole : IInteractionUtilisateur
         Console.WriteLine(message);
     }
 
-    public string DemanderString()
+    public string DemanderString(string message)
     {
-        return Console.ReadLine() ?? string.Empty;
+        while (true)
+        {
+            Console.Write(message);
+            string reponse = Console.ReadLine() ?? string.Empty;
+            if (reponse.Length > 0)
+                return reponse;
+        }
+    }
+
+    public string DemanderChoix(string message)
+    {
+        while (true)
+        {
+            Console.Write(message);
+            string reponse = Console.ReadLine() ?? string.Empty;
+            if (reponse == "1" || reponse == "2")
+                return reponse;
+        }
+
+    }
+
+
+    public string DemanderMail(string message)
+    {
+        while (true)
+        {
+            Console.Write(message);
+            string reponse = Console.ReadLine() ?? string.Empty;
+            if (reponse.Length > 1 && reponse.Contains("@"))
+                return reponse;
+        }
+
     }
 
     public double NombreGrille(double choixTotalDeGrille, double nombreGrille)

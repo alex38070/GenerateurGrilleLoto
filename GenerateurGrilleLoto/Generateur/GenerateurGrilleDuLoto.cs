@@ -33,98 +33,76 @@ On ne doit pas générer de grilles identiques lors d’une même génération d
 internal class GenerateurGrilleDuLoto
 {
     private readonly IInteractionUtilisateur _ui = new InteractionUtilisateurConsole();
+
+    private readonly CompteUtilisateur compteUtilisateur = new(); // Collection des Utilisateurs
     private readonly List<Utilisateur> utilisateurs = []; // Collection des Utilisateurs
     private readonly List<Grille> grilles = []; // Collection des Utilisateurs
-    private double montantCaisse;
+    private readonly Commande commande = new();
+
     //private double nombreGrille;
 
     internal void Lancer()
     {
         Prix newPrix = new();
-        string choix = "2";
-        bool estValid = false;
-        do
+        double nombreGrille;
+        double choixTotalDeGrille = 0;
+        string motDePasse = string.Empty;
+        string mail = string.Empty;
+        string choix = string.Empty;
+        bool estValide = false;
+
+        while (true)
         {
-            double nombreGrille;
-            Commande commande = new();
-            double choixTotalDeGrille = 0;
-            string motDePasse = string.Empty;
-            string mail = string.Empty;
-            if (utilisateurs.Count == 0 || choix == "1")
+            Utilisateur utilisateur = compteUtilisateur.CreerUtilisateur();//Nouvelle objet pour nouveau utilisateur
+            utilisateurs.Add(utilisateur); // Ajout Utilisateur dans la Collection parente
+            mail = utilisateur.Mail;
+            motDePasse = utilisateur.MotDePasse;
+            //montantCaisse = utilisateur.MontantCaisse;
+            estValide = (!(commande.VerifierConnexion(mail, motDePasse))); // verifier connection vaalid
+            _ui.AfficherStringLine($"\r\nBonjour {utilisateur.Prenom} {utilisateur.Nom} ravi de vous revoir");
+
+            do
             {
-                // Nouvelle objet pour nouveau utilisateur
-                _ui.AfficherString("Veuillez saisir votre Prénom : ");
-                string prenom = _ui.DemanderString();
-                _ui.AfficherString("Veuillez saisir votre Nom : ");
-                string nom = _ui.DemanderString();
-                _ui.AfficherString("Veuillez saisir votre Mail : ");
-                mail = _ui.DemanderString();
-                _ui.AfficherString("Veuillez saisir votre mot De Passe : ");
-                motDePasse = _ui.DemanderString();
-                montantCaisse = 500;
-                Utilisateur utilisateur = new(prenom, nom, mail, motDePasse, montantCaisse);
-                // Ajout Utilisateur dans la Collection parente
-                utilisateurs.Add(utilisateur);
-                motDePasse = utilisateur.MotDePasse;
-                mail = utilisateur.Mail;
+                choixTotalDeGrille += _ui.DemanderDoubleEntreMinMax("\r\nVeuillez saisir le nombre de grille voulue", 1.00, 100.00);
+                _ui.AfficherStringLine($"Tappez 1 : Vous avez {choixTotalDeGrille} grilles dans le panier! Voulez vous ajouter d'autre Grille?");
+                _ui.AfficherStringLine("Tappez 2 : Regler la commande");
+                choix = _ui.DemanderChoix("Votre choix est : ");
+                if (choix == "2")
+                    break;
 
+            } while (true);
+            double montantCaisse = utilisateur.MontantCaisse;
+            Caisse caisse = new(utilisateur.MontantCaisse, choixTotalDeGrille);
 
-            }
-            if (commande.VerifierConnexion(mail, motDePasse)) // verifier connection vaalid
-            {
-                _ui.AfficherStringLine("\r\nRavi de vous revoir");
-                bool paiementValider = true;
-                nombreGrille = _ui.DemanderDoubleEntreMinMax("\nVeuillez saisir le nombre de grille voulue", 1.00, 100.00);
-                choixTotalDeGrille = nombreGrille;
-                Console.WriteLine(choixTotalDeGrille);
-                do
-                {
-                    _ui.AfficherStringLine($"Tappez 1 : Vous avez {choixTotalDeGrille} grilles dans le panier! Voulez vous ajouter d'autre Grille?");
-                    _ui.AfficherStringLine("Tappez 2 : Regler la commande");
-                    _ui.AfficherString("Votre choix est : ");
-                    choix = _ui.DemanderString();
+            _ui.AfficherStringLine($"Votre compte est a : {montantCaisse}");
+            _ui.AfficherStringLine($"Votre compte apres paiement est a : {caisse.Encaisser()}");
+            double prix = newPrix.RetournerPrix(choixTotalDeGrille); // une fois payer retunr true pour sortir de la boucle
+            montantCaisse -= prix;
+            //paiementValider = false;
 
-                    // si choix 1 alors choix nombre grille
-                    if (choix == "1")
-                    {
-                        Console.WriteLine(choixTotalDeGrille);
-                        choixTotalDeGrille += _ui.DemanderDoubleEntreMinMax("\r\nVeuillez saisir le nombre de grille voulue", 1.00, 100.00);
-                        Console.WriteLine(choixTotalDeGrille);
-
-                    }
-                    if (choix == "2")
-                    {
-                        double prix = newPrix.RetournerPrix(nombreGrille); // une fois payer retunr true pour sortir de la boucle
-                        _ui.AfficherStringLine($"Votre compte est a : {montantCaisse}");
-                        montantCaisse -= prix;
-                        _ui.AfficherStringLine($"Votre compte apres paiement est a : {montantCaisse}");
-                        paiementValider = false;
-                    }
-
-                } while (paiementValider);
-
-                Ticket ticket = new();
-
-                ticket.FormatTicket(); // choixTotalDeGrille
-                for (int i = 1; i <= choixTotalDeGrille; i++)
-                {
-                    _ui.AfficherString($"\r\nGrille {i:00} :");
-                    Grille grille = new();
-                    grilles.Add(grille);
-                }
-            }
-
-            _ui.AfficherStringLine("Tappez 1 pour creer un compte");
-            _ui.AfficherStringLine("Tappez 2 pour vous connecter");
-            _ui.AfficherStringLine("Tapper 3 pour quitter");
-            choix = _ui.DemanderString();
-
-            if (choix == "3")
-                break;
-            if (choix == "1" || choix == "2")
-                estValid = true;
-
-
-        } while (estValid);
+        }
     }
+
+    //    Ticket ticket = new();
+
+    //    ticket.FormatTicket(); // choixTotalDeGrille
+    //    for (int i = 1; i <= choixTotalDeGrille; i++)
+    //    {
+    //        _ui.AfficherString($"\r\nGrille {i:00} :");
+    //        Grille grille = new();
+    //        grilles.Add(grille);
+    //    }
+
+    //    _ui.AfficherStringLine("Tappez 1 pour creer un compte");
+    //    _ui.AfficherStringLine("Tappez 2 pour vous connecter");
+    //    _ui.AfficherStringLine("Tapper 3 pour quitter");
+    //    choix = _ui.DemanderString("Votre choix est : ");
+
+    //    if (choix == "3")
+    //        break;
+    //    if (choix == "1" || choix == "2")
+    //        estValid = true;
+
+
+    //} while (estValid);
 }

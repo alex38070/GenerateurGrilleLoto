@@ -3,16 +3,20 @@ using GrilleEuroMillion.Interface;
 
 namespace GrilleEuroMillion.Reglement;
 
-internal class Caisse
+internal class Caisse(double montantCaisse, double choixTotalDeGrille)
 {
     internal IInteractionUtilisateur _ui = new InteractionUtilisateurConsole();
     private readonly double _montantMax = 100.00;
+    private Prix prix = new();
 
-    internal double Encaisser(double montantCaisse, double prix)
+    internal double Encaisser()
     {
-        montantCaisse = montantCaisse - prix;
+        double montantPrix = prix.RetournerPrix(choixTotalDeGrille);
+        montantCaisse = montantCaisse - montantPrix;
+        Console.WriteLine(montantPrix);
         return montantCaisse;
     }
+
 
 
 

@@ -2,11 +2,11 @@
 
 internal class Prix
 {
-    internal double RetournerPrix(double nombreGrille, double remise = 1.50)
+    internal double RetournerPrix(double nombreGrille, double remise = 0.50)
     {
         double prixBase = 7.50;
         int grillesParPalier = 2;
-        int maxGrilles = 10;
+        int maxGrilles = 100;
         int nombreGrilles = (int)Math.Min(nombreGrille, maxGrilles);
         int paliersComplets = nombreGrilles / grillesParPalier;
         int grillesRestantes = nombreGrilles % grillesParPalier;

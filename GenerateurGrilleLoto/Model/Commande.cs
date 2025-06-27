@@ -15,10 +15,8 @@ internal class Commande()
     {
         while (true)
         {
-            _ui.AfficherString("\r\nVeuillez saisir votre Identifiant de connexion : ");
-            string saisieidentifiant = _ui.DemanderString();
-            _ui.AfficherString("Veuillez saisir votre Mot de passe : ");
-            string saisieMotDePasse = _ui.DemanderString();
+            string saisieidentifiant = _ui.DemanderString("\r\nVeuillez saisir votre Identifiant de connexion : ");
+            string saisieMotDePasse = _ui.DemanderString("Veuillez saisir votre Mot de passe : ");
 
             if (saisieidentifiant == utilisateurMail && saisieMotDePasse == utilisateurMotDePasse)
                 return true;
@@ -37,8 +35,6 @@ internal class Commande()
             Grille grille = new();
             grilles.Add(grille);
         }
-
-
     }
 
 

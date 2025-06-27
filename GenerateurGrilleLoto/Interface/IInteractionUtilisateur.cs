@@ -8,7 +8,12 @@ internal interface IInteractionUtilisateur  // Pour Changer de Console a WinForm
 
     void AfficherStringLine(string message);
 
-    string DemanderString();
+    string DemanderString(string message);
+
+    string DemanderChoix(string message);
+
+    string DemanderMail(string message);
 
     double NombreGrille(double choixTotalDeGrille, double nombreGrille);
+
 }
