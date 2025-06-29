@@ -14,6 +14,6 @@ internal interface IInteractionUtilisateur  // Pour Changer de Console a WinForm
 
     string DemanderMail(string message);
 
-    double NombreGrille(double choixTotalDeGrille, double nombreGrille);
+    //double NombreGrille(double choixTotalDeGrille, double nombreGrille);
 
 }

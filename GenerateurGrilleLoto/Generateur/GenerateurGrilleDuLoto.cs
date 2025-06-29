@@ -34,87 +34,64 @@ internal class GenerateurGrilleDuLoto
 {
     private readonly IInteractionUtilisateur _ui = new InteractionUtilisateurConsole();
 
-    private readonly CompteUtilisateur compteUtilisateur = new(); // Collection des Utilisateurs
-    private readonly List<Utilisateur> utilisateurs = []; // Collection des Utilisateurs
-    private readonly List<Grille> grilles = []; // Collection des Utilisateurs
-    private readonly Commande commande = new();
-
-    //private double nombreGrille;
+    private readonly CompteUtilisateur _compteUtilisateur = new(); // Collection des Utilisateurs
+    private readonly List<Utilisateur> _utilisateurs = []; // Collection des Utilisateurs
+    private readonly Commande _commande = new();
 
     internal void Lancer()
     {
-        Prix newPrix = new();
-        double nombreGrille;
-        double choixTotalDeGrille = 0;
-        string motDePasse = string.Empty;
-        string mail = string.Empty;
-        string choix = string.Empty;
-        bool estValide = false;
+        double nombreGrille = 0;
+        string motDePasse;
+        string mail;
+        string choix;
 
         while (true)
         {
-            Utilisateur utilisateur = compteUtilisateur.CreerUtilisateur();//Nouvelle objet pour nouveau utilisateur
-            utilisateurs.Add(utilisateur); // Ajout Utilisateur dans la Collection parente
+            Utilisateur utilisateur = _compteUtilisateur.CreerUtilisateur();//Nouvelle objet pour nouveau utilisateur
+            _utilisateurs.Add(utilisateur); // Ajout Utilisateur dans la Collection parente
             mail = utilisateur.Mail;
             motDePasse = utilisateur.MotDePasse;
-            //montantCaisse = utilisateur.MontantCaisse;
-            estValide = (!(commande.VerifierConnexion(mail, motDePasse))); // verifier connection vaalid
-            _ui.AfficherStringLine($"\r\nBonjour {utilisateur.Prenom} {utilisateur.Nom} ravi de vous revoir");
 
-            do
+            _commande.VerifierConnexion(mail, motDePasse); // verifier connection vaalid
+
+            _ui.AfficherStringLine($"\r\nBonjour {utilisateur.Prenom} {utilisateur.Nom} ravi de vous compter parmit nos utilisateurs");
+
+            while (true)
             {
-                choixTotalDeGrille += _ui.DemanderDoubleEntreMinMax("\r\nVeuillez saisir le nombre de grille voulue", 1.00, 50.00);
-                if (choixTotalDeGrille >= 50)
+                nombreGrille += _ui.DemanderDoubleEntreMinMax("\r\nVeuillez saisir le nombre de grille voulue", 1.00, 50.00);
+
+                if (nombreGrille >= 50)
                 {
-                    choixTotalDeGrille = 50;
-                    _ui.AfficherStringLine("\r\nMontant maximum des grilles atteint.");
-                    _ui.AfficherStringLine($"Vous avez {choixTotalDeGrille} grilles dans votre panier, ce qui correspond au nombre maximum autorisé.");
+                    nombreGrille = 50;
+                    _ui.AfficherStringLine($"Vous avez {nombreGrille} grilles dans votre panier, ce qui correspond au nombre maximum autorisé.");
                     _ui.AfficherStringLine("Vous allez être redirigé vers le règlement de la commande.");
-                    choix = "2";
+                    break;
                 }
-                else
-                {
-                    _ui.AfficherStringLine($"\r\nTappez 1 : Vous avez {choixTotalDeGrille} grilles dans le panier! Voulez vous ajouter d'autre Grille?");
-                    _ui.AfficherStringLine("Tappez 2 : Regler la commande");
-                    choix = _ui.DemanderChoix("Votre choix est : ");
-                }
+
+                _ui.AfficherStringLine($"\r\nVous avez {nombreGrille} grilles dans votre panier!");
+
+                _ui.AfficherStringLine($"\r\nTappez 1 : Pour ajouter d'autres Grilles ?");
+                _ui.AfficherStringLine("Tappez 2 : Pour règler la commande ?");
+                choix = _ui.DemanderChoix("Votre choix est : ");
 
                 if (choix == "2")
-                {
-                    // montant impissible si la caisse nest pas sufusante
-                    double montantCaisse = utilisateur.MontantCaisse;
-                    Caisse caisse = new(utilisateur.MontantCaisse, choixTotalDeGrille);
-                    _ui.AfficherStringLine($"Votre compte est a : {montantCaisse}");
-                    _ui.AfficherStringLine($"Votre compte apres paiement est a : {caisse.Encaisser()}");
-                    double prix = newPrix.RetournerPrix(choixTotalDeGrille); // une fois payer retunr true pour sortir de la boucle
-                    montantCaisse -= prix;
-                    //paiementValider = false;
-                }
+                    break;
+            }
 
-            } while (true);
+            double montantCaisse = utilisateur.MontantCaisse;
+            Caisse caisse = new(montantCaisse, nombreGrille);
+            _ui.AfficherStringLine($"\r\nVotre compte est a : {montantCaisse} euro!");
+
+            caisse.Encaisser();
+
+            _commande.AffichageTicket(nombreGrille);
+
+            _ui.AfficherStringLine("\r\nTappez 1 pour refaire une commande?");
+            _ui.AfficherStringLine("Tapper 2 pour quitter ?");
+            choix = _ui.DemanderString("Votre choix est : ");
+
+            if (choix == "2")
+                break;
         }
     }
-
-    //    Ticket ticket = new();
-
-    //    ticket.FormatTicket(); // choixTotalDeGrille
-    //    for (int i = 1; i <= choixTotalDeGrille; i++)
-    //    {
-    //        _ui.AfficherString($"\r\nGrille {i:00} :");
-    //        Grille grille = new();
-    //        grilles.Add(grille);
-    //    }
-
-    //    _ui.AfficherStringLine("Tappez 1 pour creer un compte");
-    //    _ui.AfficherStringLine("Tappez 2 pour vous connecter");
-    //    _ui.AfficherStringLine("Tapper 3 pour quitter");
-    //    choix = _ui.DemanderString("Votre choix est : ");
-
-    //    if (choix == "3")
-    //        break;
-    //    if (choix == "1" || choix == "2")
-    //        estValid = true;
-
-
-    //} while (estValid);
 }

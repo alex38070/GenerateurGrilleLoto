@@ -46,9 +46,7 @@ internal class InteractionUtilisateurConsole : IInteractionUtilisateur
             if (reponse == "1" || reponse == "2")
                 return reponse;
         }
-
     }
-
 
     public string DemanderMail(string message)
     {
@@ -59,12 +57,10 @@ internal class InteractionUtilisateurConsole : IInteractionUtilisateur
             if (reponse.Length > 1 && reponse.Contains("@"))
                 return reponse;
         }
-
     }
 
-    public double NombreGrille(double choixTotalDeGrille, double nombreGrille)
-    {
-        return (choixTotalDeGrille + nombreGrille);
-    }
-
+    //public double NombreGrille(double choixTotalDeGrille, double nombreGrille)
+    //{
+    //    return (choixTotalDeGrille + nombreGrille);
+    //}
 }

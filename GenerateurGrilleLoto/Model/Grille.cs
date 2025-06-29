@@ -22,8 +22,6 @@ internal class Grille
     private readonly List<int> _etoiles = Enumerable.Range(1, 12).ToList();
     internal IInteractionUtilisateur _ui = new InteractionUtilisateurConsole();
 
-
-
     internal Grille()
     {
         List<int> grilleNombre = [];

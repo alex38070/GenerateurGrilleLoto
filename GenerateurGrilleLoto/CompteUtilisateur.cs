@@ -5,7 +5,6 @@ namespace GrilleEuroMillion;
 internal class CompteUtilisateur
 {
     private readonly IInteractionUtilisateur _ui = new InteractionUtilisateurConsole();
-    private readonly List<Utilisateur> utilisateurs = []; // Collection des Utilisateurs
 
     internal Utilisateur CreerUtilisateur()
     {
@@ -13,7 +12,7 @@ internal class CompteUtilisateur
         string nom = _ui.DemanderString("Veuillez saisir votre Nom : ");
         string mail = _ui.DemanderMail("Veuillez saisir votre Mail : ");
         string motDePasse = _ui.DemanderString("Veuillez saisir votre mot De Passe : ");
-        double montantCaisse = 500;
+        double montantCaisse = 200;
         return new(prenom, nom, mail, motDePasse, montantCaisse);
     }
 }

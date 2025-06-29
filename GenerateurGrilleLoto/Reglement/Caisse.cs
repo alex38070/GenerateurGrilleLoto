@@ -6,35 +6,23 @@ namespace GrilleEuroMillion.Reglement;
 internal class Caisse(double montantCaisse, double choixTotalDeGrille)
 {
     internal IInteractionUtilisateur _ui = new InteractionUtilisateurConsole();
-    private readonly double _montantMax = 100.00;
-    private Prix prix = new();
+    private readonly Prix _prix = new();
 
-    internal double Encaisser()
+    internal void Encaisser()
     {
-        double montantPrix = prix.RetournerPrix(choixTotalDeGrille);
-        montantCaisse = montantCaisse - montantPrix;
-        Console.WriteLine(montantPrix);
-        return montantCaisse;
+        double montantPrix = _prix.RetournerPrix(choixTotalDeGrille);
+        _ui.AfficherStringLine($"\r\nPrix total est : {montantPrix} euro");
+
+        if (montantCaisse - montantPrix <= 0)
+        {
+            _ui.AfficherStringLine($"\r\nMontant caisse insufisante {montantCaisse} € pour un paiement de {montantPrix} euro");
+            _ui.AfficherStringLine($"\r\nVeuillez reduire le nombre de grilles");
+        }
+        else
+        {
+            _ui.AfficherStringLine($"\r\nVotre compte est a : {montantCaisse} euro");
+            montantCaisse = montantCaisse - montantPrix;
+            _ui.AfficherString($"Votre compte après paiement est a : {montantCaisse} euro\r\n");
+        }
     }
-
-
-
-
-    //internal void Encaisser(double montantCaisse, double prix)
-    //{
-    //    _ui.AfficherStringLine("");
-    //    double montant = PrendreMonnaie(montantCaisse, prix);
-    //    string monnaie = RendreMonnaie(prix, montant);
-    //    _ui.AfficherStringLine(monnaie);
-    //}
-
-    //internal double PrendreMonnaie(double montantCaisse, double prix)
-    //    => _ui.DemanderDoubleEntreMinMax("\n\rMerci de saisir un montant à encaisser", prix, _montantMax);
-
-    //internal string RendreMonnaie(double prix, double montant)
-    //{
-    //    double monnaie = montant - prix;
-
-    //    return monnaie == 0 ? "Merci pour l' appoint" : "Voici votre monnaie : " + monnaie;
-    //}
 }
