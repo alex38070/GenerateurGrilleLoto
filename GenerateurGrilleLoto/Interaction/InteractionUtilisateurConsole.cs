@@ -58,9 +58,4 @@ internal class InteractionUtilisateurConsole : IInteractionUtilisateur
                 return reponse;
         }
     }
-
-    //public double NombreGrille(double choixTotalDeGrille, double nombreGrille)
-    //{
-    //    return (choixTotalDeGrille + nombreGrille);
-    //}
 }

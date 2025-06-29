@@ -8,7 +8,7 @@ internal class Caisse(double montantCaisse, double choixTotalDeGrille)
     internal IInteractionUtilisateur _ui = new InteractionUtilisateurConsole();
     private readonly Prix _prix = new();
 
-    internal void Encaisser()
+    internal void TraiterPaiement()
     {
         double montantPrix = _prix.RetournerPrix(choixTotalDeGrille);
         _ui.AfficherStringLine($"\r\nPrix total est : {montantPrix} euro");
