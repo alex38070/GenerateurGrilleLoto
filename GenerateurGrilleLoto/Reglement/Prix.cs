@@ -2,12 +2,12 @@
 
 internal class Prix
 {
-    internal double RetournerPrix(double nombreGrille, double remise = 0.50)
+    internal double RetournerPrix(double nombreGrille, double remise = 1.50)
     {
         double prixBase = 7.50;
-        int grillesParPalier = 2;
-        int maxGrilles = 100;
-        int nombreGrilles = (int)Math.Min(nombreGrille, maxGrilles);
+        int grillesParPalier = 10;
+        int maxGrilles = 50;
+        int nombreGrilles = (int)Math.Min(nombreGrille, maxGrilles); // recupere le plus petit
         int paliersComplets = nombreGrilles / grillesParPalier;
         int grillesRestantes = nombreGrilles % grillesParPalier;
 
@@ -17,6 +17,8 @@ internal class Prix
         // Dernier palier incomplet (s'il y a une grille "orpheline")
         double prixDernierPalier = Math.Max(0, prixBase - paliersComplets * remise);
         double totalReste = grillesRestantes * prixDernierPalier;
+
+
 
         return totalPaliers + totalReste;
     }

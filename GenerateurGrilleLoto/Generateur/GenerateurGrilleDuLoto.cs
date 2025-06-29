@@ -63,23 +63,35 @@ internal class GenerateurGrilleDuLoto
 
             do
             {
-                choixTotalDeGrille += _ui.DemanderDoubleEntreMinMax("\r\nVeuillez saisir le nombre de grille voulue", 1.00, 100.00);
-                _ui.AfficherStringLine($"Tappez 1 : Vous avez {choixTotalDeGrille} grilles dans le panier! Voulez vous ajouter d'autre Grille?");
-                _ui.AfficherStringLine("Tappez 2 : Regler la commande");
-                choix = _ui.DemanderChoix("Votre choix est : ");
+                choixTotalDeGrille += _ui.DemanderDoubleEntreMinMax("\r\nVeuillez saisir le nombre de grille voulue", 1.00, 50.00);
+                if (choixTotalDeGrille >= 50)
+                {
+                    choixTotalDeGrille = 50;
+                    _ui.AfficherStringLine("\r\nMontant maximum des grilles atteint.");
+                    _ui.AfficherStringLine($"Vous avez {choixTotalDeGrille} grilles dans votre panier, ce qui correspond au nombre maximum autorisé.");
+                    _ui.AfficherStringLine("Vous allez être redirigé vers le règlement de la commande.");
+                    choix = "2";
+                }
+                else
+                {
+                    _ui.AfficherStringLine($"\r\nTappez 1 : Vous avez {choixTotalDeGrille} grilles dans le panier! Voulez vous ajouter d'autre Grille?");
+                    _ui.AfficherStringLine("Tappez 2 : Regler la commande");
+                    choix = _ui.DemanderChoix("Votre choix est : ");
+                }
+
                 if (choix == "2")
-                    break;
+                {
+                    // montant impissible si la caisse nest pas sufusante
+                    double montantCaisse = utilisateur.MontantCaisse;
+                    Caisse caisse = new(utilisateur.MontantCaisse, choixTotalDeGrille);
+                    _ui.AfficherStringLine($"Votre compte est a : {montantCaisse}");
+                    _ui.AfficherStringLine($"Votre compte apres paiement est a : {caisse.Encaisser()}");
+                    double prix = newPrix.RetournerPrix(choixTotalDeGrille); // une fois payer retunr true pour sortir de la boucle
+                    montantCaisse -= prix;
+                    //paiementValider = false;
+                }
 
             } while (true);
-            double montantCaisse = utilisateur.MontantCaisse;
-            Caisse caisse = new(utilisateur.MontantCaisse, choixTotalDeGrille);
-
-            _ui.AfficherStringLine($"Votre compte est a : {montantCaisse}");
-            _ui.AfficherStringLine($"Votre compte apres paiement est a : {caisse.Encaisser()}");
-            double prix = newPrix.RetournerPrix(choixTotalDeGrille); // une fois payer retunr true pour sortir de la boucle
-            montantCaisse -= prix;
-            //paiementValider = false;
-
         }
     }
 
