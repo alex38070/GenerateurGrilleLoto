@@ -5,7 +5,7 @@ using GrilleEuroMillion.Reglement;
 
 namespace GrilleEuroMillion.Generateur;
 
-internal class GenerateurGrilleDuLoto
+internal class GenerateurGrilleDuLoto()
 {
     private readonly IInteractionUtilisateur _ui = new InteractionUtilisateurConsole();
     private readonly CompteUtilisateur _compteUtilisateur = new(); // Collection des Utilisateurs
@@ -14,25 +14,29 @@ internal class GenerateurGrilleDuLoto
 
     internal void Lancer()
     {
-        double nombreGrille = 0;
-        string choix = "";
-
         while (true)
         {
-            Utilisateur utilisateur = _compteUtilisateur.CreerNouvelUtilisateur();//Nouvelle objet pour nouveau utilisateur
-            _utilisateurs.Add(utilisateur); // Ajout Utilisateur dans la Collection parente
+            double nombreGrille = 0;
+            double montantCaisse = 100;
+            _ui.AfficherStringLine("Tapez 1 : Pour creer un utilisateur");
+            _ui.AfficherStringLine("Taper 2 : Pour continuer sans connexion ?");
+            string choix = _ui.DemanderString("Votre choix est : ");
 
-            _compteUtilisateur.AuthentifierUtilisateur(utilisateur.Mail, utilisateur.MotDePasse, utilisateur.Prenom, utilisateur.Nom);  // Connection utilsateur
+            if (choix == "1")
+            {
+                Utilisateur utilisateur = _compteUtilisateur.CreerNouvelUtilisateur();//Nouvelle objet pour nouveau utilisateur
+                _utilisateurs.Add(utilisateur); // Ajout Utilisateur dans la liste parente
+                _compteUtilisateur.AuthentifierUtilisateur(utilisateur.Mail, utilisateur.MotDePasse, utilisateur.Prenom, utilisateur.Nom);  // Connection utilsateur
+                montantCaisse = utilisateur.MontantCaisse; // Montant caisse de l'utilisateur
+            }
 
             nombreGrille = _commande.DemanderNombreDeGrilles(nombreGrille, choix); // return choix utilisateur du nombre de grille
-            double montantCaisse = utilisateur.MontantCaisse; // Montant caisse de l'utilisateur
             Caisse caisse = new(montantCaisse, nombreGrille);
 
             _ui.AfficherStringLine($"\r\nVotre compte est a : {montantCaisse} euro!");
 
-            caisse.TraiterPaiement();
-
-            _commande.AffichageTicket(nombreGrille); // erreur a bloquer si paiement a echouer
+            if (caisse.TraiterPaiement())
+                _compteUtilisateur.AffichageTicket(nombreGrille);
 
             _ui.AfficherStringLine("\r\nTapez 1 pour refaire une commande?");
             _ui.AfficherStringLine("Taper 2 pour quitter ?");

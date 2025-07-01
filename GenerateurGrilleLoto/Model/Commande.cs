@@ -19,12 +19,6 @@ internal class Commande()
         }
     }
 
-    internal void AffichageTicket(double nombreTicket)
-    {
-        Ticket ticket = new(nombreTicket);
-        ticket.FormaterTicket();
-    }
-
     internal double DemanderNombreDeGrilles(double nombreGrille, string choix)
     {
         while (true)

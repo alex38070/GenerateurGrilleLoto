@@ -5,62 +5,52 @@ namespace GrilleEuroMillion.Model;
 
 internal class Grille
 {
-    private readonly List<int> _numeros = Enumerable.Range(1, 50).ToList();
-    private readonly List<int> _etoiles = Enumerable.Range(1, 12).ToList();
+    public List<int> GrilleList { get; set; } = new();
     internal IInteractionUtilisateur _ui = new InteractionUtilisateurConsole();
 
     internal Grille()
     {
+        GrilleList = ObtenirGrille(); // elle ne peut pas etre nul car lutilisateur doit chois 1 ou 50
+    }
+
+    internal List<int> ObtenirGrille()
+    {
+        List<int> _numeros = [.. Enumerable.Range(1, 50)]; // ou soit Enumerable.Range(1, 50).ToList();
+        List<int> _etoiles = [.. Enumerable.Range(1, 12)];
         List<int> grilleNombre = [];
         List<int> grilleEtoile = [];
-        int nombreGrilleNumeros = 5;
-        int nombreEtoileNumeros = 2;
+        int nombreDeNombre = 5;
+        int nombreEtoile = 2;
 
-        ObtenirNumeroDifferentAleatoire(grilleNombre, nombreGrilleNumeros);
-        List<int> grilleNombreTrier = grilleNombre.OrderBy(item => item).ToList();
-
-        ObtenirEtoileDifferentAleatoire(grilleNombre, grilleEtoile, nombreEtoileNumeros);
-        List<int> grilleEtoileTrier = grilleEtoile.OrderBy(item => item).ToList();
-
-        Affichage(grilleNombreTrier);
-        Affichage(grilleEtoileTrier);
-    }
-
-    internal List<int> ObtenirNumeroDifferentAleatoire(List<int> grilleNumeros, int combienNombre)
-    {
         do
         {
-            int numero = _numeros[Random.Shared.Next(1, _numeros.Count)];
-            if (!grilleNumeros.Contains(numero))
-                grilleNumeros.Add(numero);
+            int numero = NombreAleatoire(_numeros);
+            if (!grilleNombre.Contains(numero))
+                grilleNombre.Add(numero);
 
-        } while (grilleNumeros.Count < combienNombre);
+        } while (grilleNombre.Count < nombreDeNombre);
 
-        return grilleNumeros;
-    }
-
-    internal List<int> ObtenirEtoileDifferentAleatoire(List<int> grilleNumeros, List<int> grilleEtoile, int combienNombre)
-    {
         do
         {
-            int numero = _numeros[Random.Shared.Next(1, _etoiles.Count)];
-            if (!grilleNumeros.Contains(numero) && !grilleEtoile.Contains(numero))
+            int numero = NombreAleatoire(_etoiles);
+            if (!grilleEtoile.Contains(numero))
                 grilleEtoile.Add(numero);
 
-        } while (grilleEtoile.Count < combienNombre);
+        } while (grilleEtoile.Count < nombreEtoile);
 
-        return grilleEtoile;
+        List<int> grilleAleatoire = grilleNombre.OrderBy(item => item).ToList();
+        List<int> grilleEtoileTrier = grilleEtoile.OrderBy(item => item).ToList();
+
+        for (int i = 0; i < grilleEtoileTrier.Count; i++)
+        {
+            grilleAleatoire.Add(grilleEtoileTrier[i]);
+        }
+
+        return grilleAleatoire;
     }
 
-    internal void Affichage(List<int> ListAAfficher)
+    internal int NombreAleatoire(List<int> liste)
     {
-        for (int i = 0; i < ListAAfficher.Count; i++)
-        {
-            int item = ListAAfficher[i];
-            _ui.AfficherString($"  {item:00}");
-
-            if (i == 4)
-                _ui.AfficherString("  *");
-        }
+        return liste[Random.Shared.Next(1, liste.Count)];
     }
 }
