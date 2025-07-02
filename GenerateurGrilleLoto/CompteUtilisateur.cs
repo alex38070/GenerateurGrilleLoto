@@ -20,7 +20,7 @@ internal class CompteUtilisateur(IInteractionUtilisateur _ui)
     {
         Commande _commande = new(_ui);
         _commande.VerifierConnexion(mail, motDePasse); // verifier connection vaalid
-        _ui.AfficherStringLine($"\r\nBonjour {prenom} {nom} ravi de vous compter parmi nos utilisateurs");
+        _ui.AfficherStringLine($"\r\nBonjour {nom} {prenom} ravi de vous compter parmi nos utilisateurs");
     }
 
     internal void AffichageTicket(double nombreTicket)

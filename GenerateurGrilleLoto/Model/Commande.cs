@@ -8,13 +8,20 @@ internal class Commande(IInteractionUtilisateur _ui) // jaimerais sauvegarder le
 
     public bool VerifierConnexion(string utilisateurMail, string utilisateurMotDePasse)
     {
+        int chance = 2;
         while (true)
         {
-            string saisieidentifiant = _ui.DemanderString("\r\nVeuillez saisir votre Identifiant de connexion : ");
-            string saisieMotDePasse = _ui.DemanderString("Veuillez saisir votre Mot de passe : ");
+            for (int i = 0; i <= 2; i++)
+            {
+                string saisieidentifiant = _ui.DemanderMail("\r\nVeuillez saisir votre Identifiant de connexion : ");
+                string saisieMotDePasse = _ui.DemanderString("Veuillez saisir votre Mot de passe : ");
 
-            if (saisieidentifiant == utilisateurMail && saisieMotDePasse == utilisateurMotDePasse)
-                return true;
+                if (saisieidentifiant == utilisateurMail && saisieMotDePasse == utilisateurMotDePasse)
+                    return true;
+                _ui.AfficherStringLine($"Vous avez encore {chance - i} chance avant blocoge");
+                if (i == 0)
+                    break;
+            }
         }
     }
 

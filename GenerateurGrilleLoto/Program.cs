@@ -6,7 +6,6 @@ namespace GrilleEuroMillion;
 
 internal class Program()
 {
-
     internal static void Main()
     {
         IInteractionUtilisateur _ui = new InteractionUtilisateurConsole();
