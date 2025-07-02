@@ -1,12 +1,11 @@
-﻿using GrilleEuroMillion.Interaction;
-using GrilleEuroMillion.Interface;
+﻿using GrilleEuroMillion.Interface;
 
 namespace GrilleEuroMillion.Model;
 
-internal class Ticket(double nombreGrille)
+internal class Ticket(IInteractionUtilisateur _ui, double nombreGrille)
 {
     internal double NombreGrille { get; set; } = nombreGrille;
-    internal IInteractionUtilisateur _ui = new InteractionUtilisateurConsole();
+    internal IInteractionUtilisateur _ui = _ui;
 
     internal void ImprimerTicket()
     {
@@ -18,13 +17,14 @@ internal class Ticket(double nombreGrille)
 
         for (int i = 1; i <= NombreTickets; i++)
         {
-            Console.WriteLine("");
+            _ui.AfficherStringLine("");
             _ui.AfficherString($"\r\nTicket {i:00} :  {dateTime:dddd} {dateTime.Day:00} / {dateTime.Month:00} / {dateTime.Year}  {dateTime.Hour:00}:{dateTime.Minute:00}:{dateTime.Second:00}");
             AfficherGrille(nombreGrilleMax);
         }
 
         if (AffichageResteTicket > 0)
         {
+            _ui.AfficherStringLine("");
             _ui.AfficherString($"\r\nTicket {(int)NombreTickets + 1:00} :  {dateTime:dddd} {dateTime.Day:00} / {dateTime.Month:00} / {dateTime.Year}  {dateTime.Hour:00}:{dateTime.Minute:00}:{dateTime.Second:00}");
             AfficherGrille(AffichageResteTicket);
         }

@@ -1,8 +1,8 @@
 ﻿namespace GrilleEuroMillion.Reglement;
 
-internal class Prix
+internal static class Prix
 {
-    internal double RetournerPrix(double nombreGrille, double remise = 1.50)
+    internal static double RetournerPrix(double nombreGrille, double remise = 1.50) // static appeler une seul fois
     {
         double prixBase = 7.50;
         int grillesParPalier = 10;

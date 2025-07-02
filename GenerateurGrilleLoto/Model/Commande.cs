@@ -1,11 +1,10 @@
-﻿using GrilleEuroMillion.Interaction;
-using GrilleEuroMillion.Interface;
+﻿using GrilleEuroMillion.Interface;
 
 namespace GrilleEuroMillion.Model;
 
-internal class Commande()
+internal class Commande(IInteractionUtilisateur _ui) // jaimerais sauvegarder les commande avec id utilisateur
 {
-    private readonly IInteractionUtilisateur _ui = new InteractionUtilisateurConsole();
+    private readonly IInteractionUtilisateur _ui = _ui;
 
     public bool VerifierConnexion(string utilisateurMail, string utilisateurMotDePasse)
     {

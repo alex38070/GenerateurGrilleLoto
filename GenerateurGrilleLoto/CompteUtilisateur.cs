@@ -1,11 +1,10 @@
-﻿using GrilleEuroMillion.Interaction;
-using GrilleEuroMillion.Interface;
+﻿using GrilleEuroMillion.Interface;
 using GrilleEuroMillion.Model;
 
 namespace GrilleEuroMillion;
-internal class CompteUtilisateur()
+internal class CompteUtilisateur(IInteractionUtilisateur _ui)
 {
-    private readonly IInteractionUtilisateur _ui = new InteractionUtilisateurConsole();
+    private readonly IInteractionUtilisateur _ui = _ui;
 
     internal Utilisateur CreerNouvelUtilisateur()
     {
@@ -19,14 +18,14 @@ internal class CompteUtilisateur()
 
     internal void AuthentifierUtilisateur(string mail, string motDePasse, string prenom, string nom)
     {
-        Commande _commande = new();
+        Commande _commande = new(_ui);
         _commande.VerifierConnexion(mail, motDePasse); // verifier connection vaalid
         _ui.AfficherStringLine($"\r\nBonjour {prenom} {nom} ravi de vous compter parmi nos utilisateurs");
     }
 
     internal void AffichageTicket(double nombreTicket)
     {
-        Ticket ticket = new(nombreTicket);
+        Ticket ticket = new(_ui, nombreTicket);
         ticket.ImprimerTicket();
     }
 }

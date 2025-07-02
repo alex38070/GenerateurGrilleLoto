@@ -1,12 +1,8 @@
-﻿using GrilleEuroMillion.Interaction;
-using GrilleEuroMillion.Interface;
-
-namespace GrilleEuroMillion.Model;
+﻿namespace GrilleEuroMillion.Model;
 
 internal class Grille
 {
     public List<int> GrilleList { get; set; } = new();
-    internal IInteractionUtilisateur _ui = new InteractionUtilisateurConsole();
 
     internal Grille()
     {

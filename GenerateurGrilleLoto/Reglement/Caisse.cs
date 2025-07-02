@@ -1,16 +1,14 @@
-﻿using GrilleEuroMillion.Interaction;
-using GrilleEuroMillion.Interface;
+﻿using GrilleEuroMillion.Interface;
 
 namespace GrilleEuroMillion.Reglement;
 
-internal class Caisse(double montantCaisse, double choixTotalDeGrille)
+internal class Caisse(IInteractionUtilisateur _ui, double montantCaisse, double choixTotalDeGrille)
 {
-    internal IInteractionUtilisateur _ui = new InteractionUtilisateurConsole();
-    private readonly Prix _prix = new();
+    internal IInteractionUtilisateur _ui = _ui;
 
     internal bool TraiterPaiement()
     {
-        double montantPrix = _prix.RetournerPrix(choixTotalDeGrille);
+        double montantPrix = Prix.RetournerPrix(choixTotalDeGrille);
         _ui.AfficherStringLine($"\r\nPrix total est : {montantPrix} euro");
         bool paiementValid = false;
         if (montantCaisse - montantPrix <= 0)
@@ -23,7 +21,7 @@ internal class Caisse(double montantCaisse, double choixTotalDeGrille)
             _ui.AfficherStringLine($"\r\nVotre compte est a : {montantCaisse} euro");
             montantCaisse = montantCaisse - montantPrix;
             paiementValid = true;
-            _ui.AfficherString($"Votre compte après paiement est a : {montantCaisse} euro\r\n");
+            _ui.AfficherStringLine($"Votre compte après paiement est a : {montantCaisse} euro");
         }
         return paiementValid;
     }

@@ -1,16 +1,15 @@
-﻿using GrilleEuroMillion.Interaction;
-using GrilleEuroMillion.Interface;
+﻿using GrilleEuroMillion.Interface;
 using GrilleEuroMillion.Model;
 using GrilleEuroMillion.Reglement;
 
 namespace GrilleEuroMillion.Generateur;
 
-internal class GenerateurGrilleDuLoto()
+internal class GenerateurGrilleDuLoto(IInteractionUtilisateur _ui)
 {
-    private readonly IInteractionUtilisateur _ui = new InteractionUtilisateurConsole();
-    private readonly CompteUtilisateur _compteUtilisateur = new(); // Collection des Utilisateurs
+    private readonly IInteractionUtilisateur _ui = _ui;
+    private readonly CompteUtilisateur _compteUtilisateur = new(_ui); // Collection des Utilisateurs
     private readonly List<Utilisateur> _utilisateurs = []; // Collection des Utilisateurs
-    private readonly Commande _commande = new();
+    private readonly Commande _commande = new(_ui);
 
     internal void Lancer()
     {
@@ -31,13 +30,15 @@ internal class GenerateurGrilleDuLoto()
             }
 
             nombreGrille = _commande.DemanderNombreDeGrilles(nombreGrille, choix); // return choix utilisateur du nombre de grille
-            Caisse caisse = new(montantCaisse, nombreGrille);
+            Caisse caisse = new(_ui, montantCaisse, nombreGrille);
 
             _ui.AfficherStringLine($"\r\nVotre compte est a : {montantCaisse} euro!");
 
             if (caisse.TraiterPaiement())
                 _compteUtilisateur.AffichageTicket(nombreGrille);
 
+
+            _ui.AfficherStringLine("");
             _ui.AfficherStringLine("\r\nTapez 1 pour refaire une commande?");
             _ui.AfficherStringLine("Taper 2 pour quitter ?");
             choix = _ui.DemanderString("Votre choix est : ");
